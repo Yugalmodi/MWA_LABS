@@ -1,0 +1,15 @@
+{
+  "name": "app.js",
+  "version": "1.0.0",
+  "description": "This app is adding two numbers coming from user as a URL parameter and Query String",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yugal Modi",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3"
+  }
+}
