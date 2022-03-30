@@ -3,6 +3,12 @@ const path = require("path");
 require("dotenv").config();
 const fs = require("fs");
 
+const handleRequest = function(headerType, headCode, content){
+    res.setHeader("Content-Type", headerType);
+    res.writeHead(headCode)
+    res.end(content);
+}
+
 const handleGetRequest = function(res, err, buffer){
     let statusCode;
     let fileBuffer;
@@ -13,16 +19,13 @@ const handleGetRequest = function(res, err, buffer){
         statusCode = 200;
         fileBuffer = buffer;
     }
-    
-    res.setHeader("Content-Type", "text/html");
-    res.writeHead(statusCode)
-    res.end(fileBuffer);
+    handleRequest("text/html", statusCode, fileBuffer);
 }
+
 const handlePostRequest = function(res, err, buffer){
-    res.setHeader("Content-Type", "application/json");
-    res.writeHead(200)
-    res.end(buffer);
+    handleRequest("application/json", 200, buffer);
 }
+
 const listenAllRequest = function(req, res){
     const folder_name = "public";
     const page1 = "page1.html";
