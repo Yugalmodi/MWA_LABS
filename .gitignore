@@ -1,5 +1,6 @@
 Class/Day_01
 Class/Day_02
+Class/Day_04
 
 Assignment/Lab02/using_http/node_modules
 Assignment/Lab02/using_http/package-lock.json
@@ -13,5 +14,9 @@ Assignment/Lab03/studentapp/package-lock.json
 Assignment/Lab03/sumapp/node_modules
 Assignment/Lab03/sumapp/package-lock.json
 
+Assignment/Lab04/node_modules
+Assignment/Lab04/package-lock.json
+
 Class/MEAN_GAME/node_modules
 Class/MEAN_GAME/package-lock.json
+Class/MEAN_GAME
