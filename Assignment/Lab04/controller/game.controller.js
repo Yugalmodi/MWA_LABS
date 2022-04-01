@@ -34,7 +34,7 @@ module.exports.addOne = function(req, res){
     if(req.body && req.body.title && req.body.price && req.body.minAge && req.body.minPlayers){
         let minAge = parseInt(req.body.minAge);
         let minPlayers = parseInt(req.body.minPlayers);
-        if(minAge>=6 && minAge<=99 && mingPlayers>=1 && minPlayers<=11){
+        if(minAge>=6 && minAge<=99 && minPlayers>=1 && minPlayers<=11){
             newGame.title = req.body.title;;
             newGame.price = parseFloat(req.body.price);
             newGame.minAge = minAge;
