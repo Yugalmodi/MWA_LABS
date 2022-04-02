@@ -1,5 +1,18 @@
 const mongoose = require("mongoose");
 
+const publisherSchema = mongoose.Schema({
+    name:{
+        type:String,
+        required:true
+    },
+    country:{
+        type:String,
+    },
+    established:{
+        type:Number,
+    }
+});
+
 const gameSchema = mongoose.Schema({
     title:{
         type:String,
@@ -29,7 +42,8 @@ const gameSchema = mongoose.Schema({
         min:1,
         max:10,
         required:true
-    }, 
+    },
+    publisher:publisherSchema,
     minAge:{
         type:Number,
         min:1,
