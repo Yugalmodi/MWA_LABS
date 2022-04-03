@@ -1,3 +1,11 @@
+
+function getDefaultResponse(){
+    return {
+        status:200,
+        message:process.env.MSG_RES_DEFAULT
+    }
+}
+
 const offsetValidation = function(response, req){
     let offset = parseInt(process.env.OFSSET);
     let count = parseInt(process.env.COUNT) ;
@@ -12,9 +20,13 @@ const offsetValidation = function(response, req){
         if(isNaN(offset) || isNaN(count)){
             response.status = 400;
             response.message = process.env.MSG_RES_NaN;
-        }else if(count>maxCount){
-            count = maxCount;
-        }
+        } else{
+            count = Math.abs(count);
+            offset = Math.abs(offset);
+            if(count>maxCount){
+                count = maxCount;
+            }
+        }        
     }
     response.offset = offset;
     response.count=count;
@@ -22,5 +34,5 @@ const offsetValidation = function(response, req){
 }
 
 module.exports = {
-    offsetValidation
+    offsetValidation, getDefaultResponse
 }

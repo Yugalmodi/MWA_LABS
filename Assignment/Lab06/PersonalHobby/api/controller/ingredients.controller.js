@@ -1,11 +1,7 @@
 const mongoose = require("mongoose");
 const Receipe = mongoose.model(process.env.MODEL_NAME);
 
-const _idValidation = function(req){
-    let response ={
-        status:200,
-        message : process.env.MSG_RES_DEFAULT
-    }
+const _idValidation = function(req, response){
     const receipeId = req.params.receipeId;
     const ingredientId = req.params.ingredientId;
     response.receipeId = receipeId;
@@ -22,12 +18,6 @@ const _idValidation = function(req){
 }
 
 const _errValidations = function(isIngIdCheck, err, receipe, req, response){
-    if(response==null){
-        response ={
-            status:200,
-            message : process.env.MSG_RES_DEFAULT
-        }
-    }
     if(err){
         response.status = 500;
         response.message = err;
@@ -41,43 +31,42 @@ const _errValidations = function(isIngIdCheck, err, receipe, req, response){
     return response;
 }
 
-const _responseGetAll = function(res, err, receipe){
-    let response = _errValidations(false , err, receipe, null);
+const _responseGetAll = function(res, err, receipe, req, response){
+    response = _errValidations(false , err, receipe, req, response);
     if(response.status==200){
         response.message = receipe.ingredients;
     }
     res.status(response.status).json(response.message);
 }
 const getAll = function(req, res){
-    let response = _idValidation(req);
+    let response = _idValidation(req, _getDefResponse());
     response = require("../../common/myvalidation").offsetValidation(response, req);
     if(response.status==200){
         Receipe.findById(response.receipeId).select(process.env.INGREDIENTS).exec(
-            (err, receipe) => _responseGetAll(res, err, receipe)
+            (err, receipe) => _responseGetAll(res, err, receipe, req, response)
         );
     } else{
         res.status(response.status).json(response.message);
     }
 }
 
-const _responseAddIngridient = function(err, addedIngredient, res){
-    let response = _errValidations(false , err, addedIngredient, null);
+const _responseAddIngridient = function(err, addedIngredient, res, req, response){
+    response = _errValidations(false , err, addedIngredient, req, response);
     if(response.status==200){
         response.message = addedIngredient;
     }
     res.status(response.status).json(response.message);
 }
 const _getPrepareReceipe = function(req, receipe, response){
+    const ingredientId = req.params.ingredientId;
     switch(response.functionName){
         case process.env.FUN_UPDATE_FULL:
-            let receipId = receipe.ingredients.id(req.params.ingredientId);
-            receipId.name = res.params.name;
-            receipId.color = res.params.color;
+            receipe.ingredients.id(ingredientId).name = req.body.name;
+            receipe.ingredients.id(ingredientId).color = req.body.color;
             break;
         case process.env.FUN_UPDATE_PART:
-            let receipId1 = receipe.ingredients.id(req.params.ingredientId);
-            if(req.body.name){receipId1.name = res.params.name;}
-            if(req.body.color){receipId1.color = res.params.color;}
+            if(req.body && req.body.name){receipe.ingredients.id(ingredientId).name = req.body.name;}
+            if(req.body && req.body.color){receipe.ingredients.id(ingredientId).color = req.body.color;}
             break;
         case process.env.FUN_ADD_ONE:
             let newIngredient = {
@@ -89,83 +78,84 @@ const _getPrepareReceipe = function(req, receipe, response){
     }
     return receipe;
 }
-const _responseAddOneGet = function(req, res, err, receipe){
-    let response = _errValidations( false , err, receipe, req);
+const _responseAddOneGet = function(req, res, err, receipe, respone){
+    response = _errValidations( false , err, receipe, req, respone);
     if(response.status==200){
-        _getPrepareReceipe(req,receipe,response).save(
-            (err, addedIngredient)=>_responseAddIngridient(err, addedIngredient, res));
+        _getPrepareReceipe(req,receipe, response).save(
+            (err, addedIngredient)=>_responseAddIngridient(err, addedIngredient, res, req, response));
     } else{
         res.status(response.status).json(response.message);
     }
 }
-const addOne = function(req, res, option){
-    let response = _idValidation(req);
+const _handleAdd = function(req, res, option){
+    let response = _idValidation(req, _getDefResponse());
     if(response.status==200){
-        if(option!=null){
-            response.functionName = option;
-        } else{
-            response.functionName = process.env.FUN_ADD_ONE;
-        }
+        response.functionName = option;
         Receipe.findById(response.receipeId).select(process.env.INGREDIENTS).exec(
-            (err, receipe)=>_responseAddOneGet(req, res, err, receipe));
+            (err, receipe)=>_responseAddOneGet(req, res, err, receipe, response));
     } else{
         res.status(response.status).json(response.message);
     }
 }
 
-const _responseGetOne = function(err, receipe, req, res){
-    let response = _errValidations(true , err, receipe, req);
+const _responseGetOne = function(err, receipe, req, res, response){
+    response = _errValidations(true , err, receipe, req, response);
     if(response.status==200){
         response.message = receipe.ingredients.id(req.params.ingredientId);
     }
     res.status(response.status).json(response.message);
 }
 const getOne = function(req, res){
-    let response = _idValidation(req);
+    let response = _idValidation(req, _getDefResponse());
     if(response.status==200){
         Receipe.findById(response.receipeId).select(process.env.INGREDIENTS).exec(
-            (err, receipe) => _responseGetOne(err, receipe, req, res)
+            (err, receipe) => _responseGetOne(err, receipe, req, res, response)
         );
     } else{
         res.status(response.status).json(response.message);
     }
 }
 
-const _responseDeleteIngridient = function(err, result, res){
-   let response = _errValidations(false , err, result, null);
+const _responseDeleteIngridient = function(err, result, res, req, response){
+    response = _errValidations(false , err, result, req, response);
     if(response.status==200){
         response.message = result;
     }
     res.status(response.status).json(response.message);
 }
-const _responseDeleteOneGet = function(err, receipe, req, res){
-    let response = _errValidations(true , err, receipe, req);
+const _responseDeleteOneGet = function(err, receipe, req, res, response){
+    response = _errValidations(true , err, receipe, req, response);
     if(response.status==200){
         receipe.ingredients.id(req.params.ingredientId).remove();
-        receipe.save((err, result)=>_responseDeleteIngridient(err, result, res));
+        receipe.save((err, result)=>_responseDeleteIngridient(err, result, res, req, response));
     }
     else{
         res.status(response.status).json(response.message);
     }
 }
 const deleteOne = function(req, res){
-    let response = _idValidation(req);
+    let response = _idValidation(req, _getDefResponse());
     if(response.status==200){
         Receipe.findById(response.receipeId).select(process.env.INGREDIENTS).exec(
-            (err, receipe) => _responseDeleteOneGet(err, receipe, req, res)
+            (err, receipe) => _responseDeleteOneGet(err, receipe, req, res, response)
         );
     } else{
         res.status(response.status).json(response.message);
     }
 }
-
-
+const addOne = function(req, res){
+    _handleAdd(req,res,process.env.FUN_ADD_ONE);
+}
 const fullUpdateOne= function(req, res){
-    addOne(req,res,functionName,process.env.FUN_UPDATE_FULL );
+    _handleAdd(req,res,process.env.FUN_UPDATE_FULL);
 }
 const partialUpdateOne= function(req, res){
-    addOne(req,res,process.env.FUN_UPDATE_PART);
+    _handleAdd(req,res,process.env.FUN_UPDATE_PART);
+}
+
+function _getDefResponse(){
+    return require("../../common/myvalidation").getDefaultResponse();
 }
 module.exports = {
-    getAll, addOne, getOne, deleteOne, fullUpdateOne, partialUpdateOne
+    getAll, getOne, deleteOne, addOne, fullUpdateOne, partialUpdateOne
 }
