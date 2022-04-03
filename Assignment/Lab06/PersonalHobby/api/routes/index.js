@@ -9,7 +9,9 @@ Router.route("/"+process.env.RECEIPES )
 
 Router.route("/"+process.env.RECEIPES+"/:"+process.env.RECEIPEID)
     .get(controllerReceipe.getOne)
-    .delete(controllerReceipe.deleteOne);
+    .delete(controllerReceipe.deleteOne)
+    .put(controllerReceipe.fullUpdateOne)
+    .patch(controllerReceipe.partialUpdateOne);
 
 Router.route("/"+process.env.RECEIPES+"/:"+process.env.RECEIPEID+"/"+process.env.INGREDIENTS )
     .get(ingredientsController.getAll)
@@ -17,6 +19,8 @@ Router.route("/"+process.env.RECEIPES+"/:"+process.env.RECEIPEID+"/"+process.env
     
 Router.route("/"+process.env.RECEIPES+"/:"+process.env.RECEIPEID+"/"+process.env.INGREDIENTS+"/:"+process.env.INGREDIENTID)
     .get(ingredientsController.getOne)
-    .delete(ingredientsController.deleteOne);
+    .delete(ingredientsController.deleteOne)
+    .put(ingredientsController.fullUpdateOne)
+    .patch(ingredientsController.partialUpdateOne);
 
 module.exports = Router;

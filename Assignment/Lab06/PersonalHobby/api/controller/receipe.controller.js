@@ -16,24 +16,9 @@ const getAll = function(req, res){
         status:200, 
         message: process.env.MSG_RES_DEFAULT
     }
-    let offset = 0;
-    let count = 3;
-    let maxCount = 10;
-    if(req.query && req.query.offset){
-        offset = parseInt(req.query.offset);
-    }
-    if(req.query && req.query.count){
-        count = parseInt(req.query.count);
-    }
-    if(isNaN(offset) || isNaN(count)){
-        response.status = 400;
-        response.message = process.env.MSG_RES_NaN;
-    } 
+    response = require("../../common/myvalidation").offsetValidation(response, req);
     if(response.status==200) {
-        if(count>10){
-            count = maxCount;
-        }
-        Receipe.find().skip(offset).limit(count).exec((err, receipes)=>_responseAllReceipe(response, res, err, receipes));
+        Receipe.find().skip(response.offset).limit(response.count).exec((err, receipes)=>_responseAllReceipe(response, res, err, receipes));
     } else{
         res.status(response.status).json(response.message);
     }
@@ -104,6 +89,13 @@ const deleteOne = function(req, res){
     }
 }
 
+const fullUpdateOne= function(req, res){
+    
+}
+const partialUpdateOne= function(req, res){
+    
+}
+
 module.exports = {
-    getAll, addOne, getOne, deleteOne
+    getAll, addOne, getOne, deleteOne, fullUpdateOne, partialUpdateOne
 }

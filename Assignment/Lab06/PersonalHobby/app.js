@@ -15,6 +15,8 @@ app.use(function(req, res, next){
 
 app.use("/api", routes);
 
-const server = app.listen(process.env.PORT, function(){
+
+const listner = function (){
     console.log(process.env.MSG_SERVER, server.address().port);
-});
+}
+const server = app.listen(process.env.PORT, listner);
