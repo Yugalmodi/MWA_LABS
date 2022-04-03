@@ -20,10 +20,10 @@ const getAll = function(req, res){
     let count = 3;
     let maxCount = 10;
     if(req.query && req.query.offset){
-        offset = req.query.offset;
+        offset = parseInt(req.query.offset);
     }
     if(req.query && req.query.count){
-        count = req.query.count;
+        count = parseInt(req.query.count);
     }
     if(isNaN(offset) || isNaN(count)){
         response.status = 400;
