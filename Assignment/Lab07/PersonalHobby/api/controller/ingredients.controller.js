@@ -133,7 +133,7 @@ const _addReceipe = function(receipe, req){
 const _partialUpdateReceipe = function(receipe, req){
     const id = receipe.ingredients.id(req.params.ingredientId);
     id.name = req.body.name ||  id.name;
-    id.color = req.body.color ||  id. id.name
+    id.color = req.body.color ||  id.color;
     return receipe;    
 }
 const _fullUpdateReceipe = function(receipe, req){
