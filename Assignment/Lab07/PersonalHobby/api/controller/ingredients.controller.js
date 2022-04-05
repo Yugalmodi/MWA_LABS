@@ -66,10 +66,9 @@ const _responseAddOneGet = function(req, res, err, receipe, respone, _requiredRe
         res.status(response.status).json(response.message);
     }
 }
-const _handleAdd = function(req, res, _requiredReceipe, option){
+const _handleAdd = function(req, res, _requiredReceipe){
     let response = _idValidation(req, _getDefResponse());
     if(response.status==200){
-        response.functionName = option;
         Receipe.findById(response.receipeId).select(process.env.INGREDIENTS).exec(
             (err, receipe)=>_responseAddOneGet(req, res, err, receipe, response, _requiredReceipe));
     } else{
@@ -144,13 +143,13 @@ const _fullUpdateReceipe = function(receipe, req){
     return receipe;    
 }
 const addOne = function(req, res){
-    _handleAdd(req,res, _addReceipe, process.env.FUN_ADD_ONE);
+    _handleAdd(req,res, _addReceipe);
 }
 const fullUpdateOne= function(req, res){
-    _handleAdd(req,res, _fullUpdateReceipe,process.env.FUN_UPDATE_FULL);
+    _handleAdd(req,res, _fullUpdateReceipe);
 }
 const partialUpdateOne= function(req, res){
-    _handleAdd(req,res, _partialUpdateReceipe,process.env.FUN_UPDATE_PART);
+    _handleAdd(req,res, _partialUpdateReceipe);
 }
 
 function _getDefResponse(){
