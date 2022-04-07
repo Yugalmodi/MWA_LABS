@@ -1,7 +1,3 @@
-Class/Day_01
-Class/Day_02
-Class/Day_04
-
 Assignment/Lab02/using_http/node_modules
 Assignment/Lab02/using_http/package-lock.json
 
@@ -35,7 +31,13 @@ Assignment/Lab06/PersonalHobby/package-lock.json
 Assignment/Lab07/PersonalHobby/node_modules
 Assignment/Lab07/PersonalHobby/package-lock.json
 
+Assignment/Lab08/AngPro2/public/node_modules
+Assignment/Lab08/AngPro2/public/package-lock.json
+
 Class/MEAN_GAME/node_modules
 Class/MEAN_GAME/package-lock.json
 Class/MEAN_GAME/
 Assignment/Lab05/
+
+Practice/
+Class/
