@@ -15,10 +15,10 @@ mongoose.connection.on("error", function(err){
     console.log("Some error found in connection", err);
 });
 
-process.on(process.env.SIG_INT, function(){
+process.on("SIGINT", function(){
     mongoose.connection.close(function(){
         console.log("Disconnect....");
-        process.exit(0);
+        process.exit(0); 
     });
 });
 process.on("SIGTERM", function(){
