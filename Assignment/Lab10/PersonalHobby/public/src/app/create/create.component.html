@@ -1,0 +1,18 @@
+<form #receipeForm="ngForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label>
+            name:
+            <input name="name" placeholder="name" ngModel/>
+        </label>
+    </div>
+    <div>
+        <label>
+            country:
+            <input name="country" placeholder="country" ngModel/>
+        </label>
+    </div>
+    <input  type="hidden" name="_id" ngModel/>
+    <input  type="hidden" name="ingredients" ngModel/>
+
+    <button type="submit">Add</button>
+</form>

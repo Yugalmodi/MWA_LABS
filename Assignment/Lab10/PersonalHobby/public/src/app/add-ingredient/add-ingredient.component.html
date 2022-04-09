@@ -1,0 +1,15 @@
+<button *ngIf="!isFormVisible" (click)="onIngredientClick()">Add Ingredient</button>
+<form  *ngIf="isFormVisible" #ingredientForm="ngForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label>
+            name:
+            <input name="name" placeholder="name" ngModel/>
+        </label>
+        <label>
+            country:
+            <input name="color" placeholder="color" ngModel/>
+        </label>
+        <input  type="hidden" name="_id" ngModel/>
+        <button type="submit">Add</button>
+    </div>
+</form>
