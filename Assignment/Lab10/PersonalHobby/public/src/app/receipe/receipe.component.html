@@ -1,11 +1,14 @@
 <H1>{{receipe.name}}</H1>
+
+<!-- <app-edit-receipe [receipeId]="receipe._id"  [receipe]="receipe" (editReceipeEmitter)="onReceipeChange($event)"></app-edit-receipe> -->
+
 Country:- {{receipe.country}}<br>
 Ingredients:- 
 <app-add-ingredient [receipeId]="receipe._id" (addIngredientEmitter)="onIngredientChange($event)"></app-add-ingredient>
 <ul>
     <li *ngFor="let ingredient of receipe.ingredients">
         <div>
-            <span>name:-{{ingredient.name}}</span>
+            <span>name:-{{ingredient.name}}</span> 
             <br>
             <span *ngIf="ingredient.color">color:-{{ingredient.color}}</span>
         </div>

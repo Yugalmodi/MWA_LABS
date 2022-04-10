@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Ingredients } from '../all-receipes/all-receipes.component';
@@ -9,11 +9,11 @@ import { ReceipeServiceService } from '../receipe-service.service';
   templateUrl: './add-ingredient.component.html',
   styleUrls: ['./add-ingredient.component.css']
 })
-export class AddIngredientComponent implements OnInit {
+export class AddIngredientComponent implements OnInit, AfterViewInit {
   @Input()
   receipeId!:string;
 
-  @ViewChild("addIngredientForm",  { static: false })
+  @ViewChild("addIngredientForm", {static: false})
   addIngredientForm!:NgForm;
 
   @Output()
@@ -23,10 +23,14 @@ export class AddIngredientComponent implements OnInit {
   isFormVisible:boolean=false;
 
   constructor(private service:ReceipeServiceService) { }
+  ngAfterViewInit(): void {
+    console.log("ngAfterViewInit", this.addIngredientForm);
+  }
 
   ngOnInit(): void {
+    console.log("ngOnInit", this.addIngredientForm);
     setTimeout(()=>{
-      // this.setDefaultForm();
+      this.setDefaultForm();
     }, 0)
   }
 

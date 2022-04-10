@@ -34,8 +34,10 @@ export class AddReceipeComponent implements OnInit {
       }, 
       error:(err)=>{
         console.log("Find an error", err);
+        alert("Error Found\n"+err);
       },
       complete:()=>{
+        alert("Receipe Added Succesfully");
         console.log("Get All Receipe Completed");
       }
     });
