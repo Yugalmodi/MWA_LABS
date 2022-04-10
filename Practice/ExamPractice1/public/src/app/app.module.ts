@@ -9,6 +9,7 @@ import { AllJobsComponent } from './all-jobs/all-jobs.component';
 import { OneJobComponent } from './one-job/one-job.component';
 import { RouterModule } from '@angular/router';
 import { AddJobComponent } from './add-job/add-job.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AddJobComponent } from './add-job/add-job.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot([
       {
         path:"",

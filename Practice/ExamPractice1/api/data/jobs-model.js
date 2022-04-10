@@ -43,7 +43,7 @@ const jobSchema = mongoose.Schema({
         type:Date, 
         default:Date.now
     },
-    location:{ locationSchema},
+    location:locationSchema,
     skills:[String]
 });
 

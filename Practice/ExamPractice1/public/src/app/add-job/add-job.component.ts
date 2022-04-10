@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { JobsService } from '../jobs.service';
 
 @Component({
   selector: 'app-add-job',
@@ -6,10 +8,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-job.component.css']
 })
 export class AddJobComponent implements OnInit {
+  @ViewChild("addJobForm")
+  addJobForm!:NgForm;
 
-  constructor() { }
+  constructor(private service:JobsService) { }
 
   ngOnInit(): void {
   }
-
+  onAdd(){
+    console.log(this.addJobForm.value);
+    this.service.addOneJob(this.addJobForm.value).subscribe({
+      next:()=>{
+        console.log("Added succedsfullly");
+      },
+      error:(err)=>{
+        console.log("OnAdd err"), err;
+      },
+      complete:()=>{
+        console.log("Added Completed");
+      }
+    });
+  }
 }

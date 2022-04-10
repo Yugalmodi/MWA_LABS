@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Job } from '../all-jobs/all-jobs.component';
+import { Job, Location } from '../all-jobs/all-jobs.component';
 import { JobsService } from '../jobs.service';
 
 @Component({
@@ -11,7 +11,9 @@ import { JobsService } from '../jobs.service';
 export class OneJobComponent implements OnInit {
   jobId!:string;
   job!:Job;
-  constructor(private service:JobsService, private route:ActivatedRoute) { }
+  constructor(private service:JobsService, private route:ActivatedRoute) {
+    this.job = new Job("", "", 0, "", 0, "", [], new Location("", "", "", "", "", ""));
+   }
 
   ngOnInit(): void {
     this.jobId = this.route.snapshot.params["jobId"];

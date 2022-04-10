@@ -23,11 +23,11 @@ export class Job {
   location!:Location;
   description!:string;
   experience!:number;
-  postDate!:Date;
+  postDate!:string;
   skills!:string[];
 
   constructor (id:string, title:string, salary:number, description:string,
-         experience:number, postDate:Date, skills:string[], location:Location){
+         experience:number, postDate:string, skills:string[], location:Location){
         this._id = id;
         this.title = title;
         this.salary = salary; 

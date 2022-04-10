@@ -1,4 +1,4 @@
-<form>
+<form #addJobForm="ngForm" (ngSubmit)="onAdd()">
     <div>
         <label>
             Title
@@ -11,4 +11,59 @@
             <input type="number" name="salary" ngModel>
         </label>
     </div>
+    <div>
+        <label>
+            Description
+            <input name="description" ngModel>
+        </label>
+    </div>
+    <div>
+        <label>
+            Experience
+            <input type="number" name="experience" ngModel>
+        </label>
+    </div>
+    <div>
+        <label>
+            Skills
+            <input  name="skills" ngModel>
+        </label>
+    </div>
+    <br>
+    <div>
+        <label> 
+            Locations
+            <div>
+                <label>
+                    Address
+                    <input name="address" ngModel>
+                </label>
+            </div>
+            <div>
+                <label>
+                    City
+                    <input name="city" ngModel>
+                </label>
+            </div>
+            <div>
+                <label>
+                    State
+                    <input name="state" ngModel>
+                </label>
+            </div>
+            <div>
+                <label>
+                    zip
+                    <input type="number" name="zip" ngModel>
+                </label>
+            </div>
+            <div>
+                <label>
+                    Country
+                    <input name="country" ngModel>
+                </label>
+            </div>
+        </label>
+    </div>
+    <button type="submit">Add</button>
 </form>

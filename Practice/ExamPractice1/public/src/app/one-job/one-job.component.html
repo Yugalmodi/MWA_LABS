@@ -1,3 +1,14 @@
 <H1>{{job.title}}</H1>
-Salary :- {{job.salary}}
-Description :- {{job.description}}
+Salary :- {{job.salary}}<br>
+Description :- {{job.description}}<br>
+Experience :- {{job.experience}}<br>
+Skills :- {{job.skills}}<br>
+PostDate :- {{job.postDate}}<br>
+
+<div *ngIf="job.location"> Location :- <br>
+    Address :- {{job.location.address}}<br>
+    City :- {{job.location.city}}<br>
+    Satate :- {{job.location.state}}<br>
+    Zip :- {{job.location.zip}}<br>
+    Country :- {{job.location.country}}<br>
+</div>

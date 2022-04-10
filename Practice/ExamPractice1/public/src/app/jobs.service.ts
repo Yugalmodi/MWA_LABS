@@ -12,11 +12,15 @@ export class JobsService {
   constructor(private http:HttpClient) { }
 
   getAllJobs():Observable<Job[]>{
-    const url = environment.BASE_URL+"jobs"
+    const url = environment.BASE_URL+"jobs";
     return this.http.get<Job[]>(url);
   }
   getOneJob(jobId:string):Observable<Job>{
-    const url = environment.BASE_URL+"jobs/"+jobId
+    const url = environment.BASE_URL+"jobs/"+jobId;
     return this.http.get<Job>(url);
+  }
+  addOneJob(job:any):Observable<any>{
+    const url = environment.BASE_URL+"jobs";
+    return this.http.post<any>(url, job);
   }
 }
