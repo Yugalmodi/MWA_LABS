@@ -4,11 +4,11 @@ import { Receipe } from '../all-receipes/all-receipes.component';
 import { ReceipeServiceService } from '../receipe-service.service';
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-add-receipe',
+  templateUrl: './add-receipe.component.html',
+  styleUrls: ['./add-receipe.component.css']
 })
-export class CreateComponent implements OnInit {
+export class AddReceipeComponent implements OnInit {
   @ViewChild("receipeForm")
   receipeForm!:NgForm;
   receipe!:Receipe;
@@ -17,7 +17,7 @@ export class CreateComponent implements OnInit {
   
   ngOnInit(): void {
     setTimeout(()=>{
-      this.setDefaultForm();
+      // this.setDefaultForm();
     }, 0)
   }
 

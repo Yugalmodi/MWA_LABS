@@ -1,6 +1,6 @@
 <button *ngIf="!isFormVisible" (click)="onIngredientClick()">Add Ingredient</button>
 <div *ngIf="isFormVisible" >
-    <form  #ingredientForm="ngForm" (ngSubmit)="onSubmit()">
+    <form  #addIngredientForm="ngForm" (ngSubmit)="onSubmit()">
         <div>
             <label>
                 name:

@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { ReceipeServiceService } from '../receipe-service.service';
 
 @Component({
-  selector: 'app-delete',
-  templateUrl: './delete.component.html',
-  styleUrls: ['./delete.component.css']
+  selector: 'app-delete-receipe',
+  templateUrl: './delete-receipe.component.html',
+  styleUrls: ['./delete-receipe.component.css']
 })
-export class DeleteComponent implements OnInit {
+export class DeleteReceipeComponent implements OnInit {
   @Input()
   receipeId!:string;
 

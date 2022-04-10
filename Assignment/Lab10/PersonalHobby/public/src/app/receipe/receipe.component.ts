@@ -37,6 +37,13 @@ export class ReceipeComponent implements OnInit {
 
   onIngredientChange(status:any){
     console.log("onIngredientAdded", status);
+    this._onDataChanges(status);
+  }
+  onReceipeChange(status:any){
+    console.log("onReceipeChange", status);
+    this._onDataChanges(status);
+  }
+  _onDataChanges(status:any){
     if(status==200){
       this._updateReceipe();
     }

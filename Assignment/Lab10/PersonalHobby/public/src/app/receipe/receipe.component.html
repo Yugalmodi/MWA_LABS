@@ -13,4 +13,6 @@ Ingredients:-
         <app-edit-ingredient [receipeId]="receipe._id"  [ingredient]="ingredient" (editIngredientEmitter)="onIngredientChange($event)"></app-edit-ingredient>
     </li>
 </ul>
-<app-delete [receipeId]="receipe._id"></app-delete>
+<app-delete-receipe [receipeId]="receipe._id"></app-delete-receipe>
+<app-edit-receipe [receipeId]="receipe._id"  [receipe]="receipe" (editReceipeEmitter)="onReceipeChange($event)"></app-edit-receipe>
+   

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Ingredients } from '../all-receipes/all-receipes.component';
 import { ReceipeServiceService } from '../receipe-service.service';
@@ -8,15 +8,15 @@ import { ReceipeServiceService } from '../receipe-service.service';
   templateUrl: './edit-ingredient.component.html',
   styleUrls: ['./edit-ingredient.component.css']
 })
-export class EditIngredientComponent implements OnInit {
+export class EditIngredientComponent implements OnInit, AfterViewInit {
   @Input()
   receipeId!:string;
 
   @Input()
   ingredient!:Ingredients;
 
-  @ViewChild("ingredientForm",  { static: false })
-  ingredientForm!:NgForm;
+  @ViewChild("editIngredientForm",  { static: false })
+  editIngredientForm!:NgForm;
 
   @Output()
   editIngredientEmitter: EventEmitter<number> = new EventEmitter<number>();
@@ -24,16 +24,18 @@ export class EditIngredientComponent implements OnInit {
   isFormVisible:boolean=false;
 
   constructor(private service:ReceipeServiceService) { }
-
-  ngOnInit(): void {    
+  ngAfterViewInit(): void {
     setTimeout(()=>{
-      this.setDefaultForm();
+      // this.setDefaultForm();
     }, 0)
   }
 
+  ngOnInit(): void { 
+  }
+
   setDefaultForm(){
-    console.log("setDefaultForm", this.ingredient, this.ingredientForm);
-    this.ingredientForm.setValue(this.ingredient);
+    console.log("setDefaultForm", this.ingredient, this.editIngredientForm);
+    this.editIngredientForm.setValue(this.ingredient);
   }
 
   onIngredientClick(){
@@ -61,8 +63,8 @@ export class EditIngredientComponent implements OnInit {
     });
   }
   onEditClick(){
-    console.log("onEdit called", this.ingredientForm.value);
-    this.service.editOneIngredient(this.receipeId, this.ingredientForm.value).subscribe({
+    console.log("onEdit called", this.editIngredientForm.value);
+    this.service.editOneIngredient(this.receipeId, this.ingredient._id, this.editIngredientForm.value).subscribe({
       next:(result)=>{
       }, 
       error:(err)=>{

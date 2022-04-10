@@ -138,7 +138,7 @@ const _partialUpdateReceipe = function(receipe, req){
 }
 const _fullUpdateReceipe = function(receipe, req){
     const ingredientId = receipe.ingredients.id(req.params.ingredientId);
-    ingredientId.name = req.body.name;
+    ingredientId.name = req.body.name; 
     ingredientId.color = req.body.color;
     return receipe;    
 }

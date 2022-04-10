@@ -7,14 +7,15 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { AllReceipesComponent } from './all-receipes/all-receipes.component';
 import { ReceipeComponent } from './receipe/receipe.component';
-import { DeleteComponent } from './delete/delete.component';
-import { CreateComponent } from './create/create.component';
+import { DeleteReceipeComponent } from './delete-receipe/delete-receipe.component';
+import { AddReceipeComponent } from './add-receipe/add-receipe.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MyErrorComponent } from './my-error/my-error.component';
 import { FormsModule } from '@angular/forms';
 import { EditIngredientComponent } from './edit-ingredient/edit-ingredient.component';
 import { AddIngredientComponent } from './add-ingredient/add-ingredient.component';
+import { EditReceipeComponent } from './edit-receipe/edit-receipe.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +25,12 @@ import { AddIngredientComponent } from './add-ingredient/add-ingredient.componen
     FooterComponent,
     AllReceipesComponent,
     ReceipeComponent,
-    DeleteComponent,
-    CreateComponent,
+    DeleteReceipeComponent,
+    AddReceipeComponent,
     MyErrorComponent,
     EditIngredientComponent,
-    AddIngredientComponent
+    AddIngredientComponent,
+    EditReceipeComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import { AddIngredientComponent } from './add-ingredient/add-ingredient.componen
       },
       {
         path:"addNew",
-        component:CreateComponent
+        component:AddReceipeComponent
       },
       {
         path:"**",

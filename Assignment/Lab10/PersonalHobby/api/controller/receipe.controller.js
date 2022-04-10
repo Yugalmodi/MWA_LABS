@@ -11,6 +11,33 @@ const _responseAllReceipe = function(response, res, err, receipes){
     }
     res.status(response.status).json(response.message);
 }
+const  _getQuery = function(response){
+    let query = null;
+    if(response.lat!=0.0){
+        console.log("lat");
+        const point = {
+            type:"Point",
+            coordinates:[response.lng, response.lat]
+        }
+        query = {
+            "publisher.location.coordinates":{
+                $near:{
+                    $geometry:point,
+                    $minDistance:0,
+                    $maxDistance:response.distance
+                }
+            }
+        }
+    } else if(response.name!=null){
+        console.log("country");
+        query={name:response.name}
+    } else if(response.country!=null){
+        console.log("country");
+        query={country:response.country}
+    }
+    console.log("Query", query, response);
+    return query;
+}
 const getAll = function(req, res){
     let response ={
         status:200, 
@@ -19,7 +46,7 @@ const getAll = function(req, res){
     response = require("../../common/myvalidation").offsetValidation(response, req);
     console.log(response.offset, response.count);
     if(response.status==200) {
-        Receipe.find().skip(response.offset).limit(response.count).exec((err, receipes)=>_responseAllReceipe(response, res, err, receipes));
+        Receipe.find(_getQuery(response)).skip(response.offset).limit(response.count).exec((err, receipes)=>_responseAllReceipe(response, res, err, receipes));
     } else{
         res.status(response.status).json(response.message);
     }
@@ -127,15 +154,17 @@ const _update = function(req, res, udpateReceipe){
     }
 }
 const _fullUpdateReceipe = function(receipe, req){
+    console.log("_fullUpdateReceipe - start ", receipe, req.body);
     receipe.name = req.body.name;
     receipe.country = req.body.country;
-    receipe.ingredients = [req.body.ingredients]||[];
+    console.log("_fullUpdateReceipe - end", receipe);
     return receipe;
 }
 const _partialUpdateReceipe = function(receipe, req){
+    console.log("_partialUpdateReceipe - start ", receipe, req.body);
     receipe.name = req.body.name || receipe.name ;
     receipe.country = req.body.country || receipe.country;
-    receipe.ingredients = [req.body.ingredients] || receipe.ingredients;
+    console.log("_partialUpdateReceipe - end", receipe);
     return receipe;
 }
 const fullUpdateOne= function(req, res){

@@ -16,6 +16,16 @@ export class ReceipeServiceService {
     const url= environment.BASE_URL+"receipes?offset=8&count=15";
     return this.http.get<Receipe[]>(url);
   }
+  getAllReceipeBySearch(searchBy:string, query:string, count:number):Observable<Receipe[]>{
+    if(query!=''){
+      query = searchBy+"="+query;
+    } else if(!count){
+      query = "count="+count;
+    }
+    const url= environment.BASE_URL+"receipes?count="+count+"&"+query;
+    console.log("getAllReceipeBySearch", url, query);
+    return this.http.get<Receipe[]>(url);
+  }
 
   getOneReceipe(receipeId:string):Observable<Receipe>{
     const url= environment.BASE_URL+"receipes/"+receipeId;
@@ -34,6 +44,7 @@ export class ReceipeServiceService {
 
   editOneReceipe(receipeId:string, receipe:Receipe):Observable<any>{
     const url= environment.BASE_URL+"receipes/"+receipeId;
+    console.log("editOneReceipe", url, receipeId, receipe);
     return this.http.patch<any>(url, receipe); 
   }
 
@@ -42,10 +53,8 @@ export class ReceipeServiceService {
     return this.http.post<any>(url, ingredient); 
   }
 
-  editOneIngredient(receipeId:string, ingredient:Ingredients):Observable<any>{
-    const url= environment.BASE_URL+"receipes/"+receipeId+"/ingredients/"+ingredient._id;
-    console.log("editOneIngredient", url, ingredient, ingredient._id);
-    
+  editOneIngredient(receipeId:string, ingredientId:string, ingredient:Ingredients):Observable<any>{
+    const url= environment.BASE_URL+"receipes/"+receipeId+"/ingredients/"+ingredientId;    
     return this.http.patch<any>(url, ingredient); 
   }
 

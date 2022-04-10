@@ -13,8 +13,8 @@ export class AddIngredientComponent implements OnInit {
   @Input()
   receipeId!:string;
 
-  @ViewChild("ingredientForm",  { static: false })
-  ingredientForm!:NgForm;
+  @ViewChild("addIngredientForm",  { static: false })
+  addIngredientForm!:NgForm;
 
   @Output()
   addIngredientEmitter: EventEmitter<number> = new EventEmitter<number>();
@@ -26,14 +26,14 @@ export class AddIngredientComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(()=>{
-      this.setDefaultForm();
+      // this.setDefaultForm();
     }, 0)
   }
 
   setDefaultForm(){
     this.ingredient = new Ingredients("", "", "");
-    console.log("setDefaultForm", this.ingredient, this.ingredientForm);
-    this.ingredientForm.setValue(this.ingredient);
+    console.log("setDefaultForm", this.ingredient, this.addIngredientForm);
+    this.addIngredientForm.setValue(this.ingredient);
   }
 
   onIngredientClick(){
@@ -43,8 +43,8 @@ export class AddIngredientComponent implements OnInit {
     this.isFormVisible = false;
   }
   onSubmit(){
-    console.log(this.ingredientForm.value);
-    this.service.addOneIngredient(this.receipeId, this.ingredientForm.value).subscribe({
+    console.log(this.addIngredientForm.value);
+    this.service.addOneIngredient(this.receipeId, this.addIngredientForm.value).subscribe({
       next:(result)=>{
       }, 
       error:(err)=>{

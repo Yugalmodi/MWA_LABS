@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ReceipeServiceService } from '../receipe-service.service';
 
 export class Ingredients {
@@ -33,11 +34,33 @@ export class Receipe {
 })
 export class AllReceipesComponent implements OnInit {
   receipes!:Receipe[];
+  searchList:string[] = ["name","country"];
+  countList:number[] = [3, 5, 8, 10];
+  ngSelectSearch = this.searchList[0];
+  ngSelectCount = this.countList[0];
   constructor(private service:ReceipeServiceService) { 
   }
 
   ngOnInit(): void {
     this.service.getAllReceipe().subscribe({
+      next:(result)=>{
+        this.receipes = result;
+        console.log(this.receipes);
+      }, 
+      error:(err)=>{
+        console.log("Find an error", err);
+      },
+      complete:()=>{
+        console.log("Get All Receipe Completed");
+      }
+    });
+  }
+
+  onSearch(formData:NgForm){
+    console.log(formData.value, this.ngSelectCount);
+
+    this.service.getAllReceipeBySearch(formData.value.searchBy, 
+          formData.value.search_query, this.ngSelectCount).subscribe({
       next:(result)=>{
         this.receipes = result;
         console.log(this.receipes);
