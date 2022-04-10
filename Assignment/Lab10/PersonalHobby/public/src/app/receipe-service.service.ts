@@ -44,6 +44,8 @@ export class ReceipeServiceService {
 
   editOneIngredient(receipeId:string, ingredient:Ingredients):Observable<any>{
     const url= environment.BASE_URL+"receipes/"+receipeId+"/ingredients/"+ingredient._id;
+    console.log("editOneIngredient", url, ingredient, ingredient._id);
+    
     return this.http.patch<any>(url, ingredient); 
   }
 

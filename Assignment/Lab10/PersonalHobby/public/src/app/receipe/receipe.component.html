@@ -1,13 +1,16 @@
 <H1>{{receipe.name}}</H1>
 Country:- {{receipe.country}}<br>
-Ingredients:- <app-add-ingredient [receipeId]="receipe._id"></app-add-ingredient>
+Ingredients:- 
+<app-add-ingredient [receipeId]="receipe._id" (addIngredientEmitter)="onIngredientChange($event)"></app-add-ingredient>
 <ul>
     <li *ngFor="let ingredient of receipe.ingredients">
-        <span>name:-{{ingredient.name}}</span>
-        <!-- <app-edit-ingredient [receipeId, ingredient]="receipe._id, ingredient"></app-edit-ingredient>
-        <app-delete-ingredient [receipeId, ingredientId]="receipe._id, ingredient._id"></app-delete-ingredient> -->
-        <br>
-        <span *ngIf="ingredient.color">color:-{{ingredient.color}}</span>
+        <div>
+            <span>name:-{{ingredient.name}}</span>
+            <br>
+            <span *ngIf="ingredient.color">color:-{{ingredient.color}}</span>
+        </div>
+
+        <app-edit-ingredient [receipeId]="receipe._id"  [ingredient]="ingredient" (editIngredientEmitter)="onIngredientChange($event)"></app-edit-ingredient>
     </li>
 </ul>
 <app-delete [receipeId]="receipe._id"></app-delete>

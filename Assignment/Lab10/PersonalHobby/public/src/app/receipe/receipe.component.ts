@@ -10,17 +10,21 @@ import { ReceipeServiceService } from '../receipe-service.service';
 })
 export class ReceipeComponent implements OnInit {
   receipe!:Receipe;
+  receipeId!:string;
 
   constructor(private activeRoute:ActivatedRoute, private service:ReceipeServiceService) { 
     this.receipe= new Receipe("", "", "", []);
   }
-
+  
   ngOnInit(): void {
-    const receipeId = this.activeRoute.snapshot.params["receipeId"];
-    this.service.getOneReceipe(receipeId).subscribe({
+    this.receipeId = this.activeRoute.snapshot.params["receipeId"];
+    this._updateReceipe();
+  }
+
+  _updateReceipe(){
+    this.service.getOneReceipe(this.receipeId).subscribe({
       next:(result)=>{
         this.receipe = result;
-        console.log(this.receipe);
       }, 
       error:(err)=>{
         console.log("Find an error", err);
@@ -31,4 +35,10 @@ export class ReceipeComponent implements OnInit {
     });
   }
 
+  onIngredientChange(status:any){
+    console.log("onIngredientAdded", status);
+    if(status==200){
+      this._updateReceipe();
+    }
+  }
 }

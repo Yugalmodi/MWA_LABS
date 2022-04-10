@@ -14,7 +14,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyErrorComponent } from './my-error/my-error.component';
 import { FormsModule } from '@angular/forms';
 import { EditIngredientComponent } from './edit-ingredient/edit-ingredient.component';
-import { DeleteIngredientComponent } from './delete-ingredient/delete-ingredient.component';
 import { AddIngredientComponent } from './add-ingredient/add-ingredient.component';
 
 @NgModule({
@@ -29,7 +28,6 @@ import { AddIngredientComponent } from './add-ingredient/add-ingredient.componen
     CreateComponent,
     MyErrorComponent,
     EditIngredientComponent,
-    DeleteIngredientComponent,
     AddIngredientComponent
   ],
   imports: [

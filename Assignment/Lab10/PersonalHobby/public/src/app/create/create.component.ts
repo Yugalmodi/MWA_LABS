@@ -25,7 +25,6 @@ export class CreateComponent implements OnInit {
     this.receipe = new Receipe("", "", "");
     this.receipeForm.setValue(this.receipe);
   }
-
   onSubmit(){
     console.log("onSubmit called");
     console.log(this.receipeForm.value);

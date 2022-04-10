@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Ingredients } from '../all-receipes/all-receipes.component';
@@ -13,13 +13,16 @@ export class AddIngredientComponent implements OnInit {
   @Input()
   receipeId!:string;
 
-  @ViewChild("ingredientForm")
+  @ViewChild("ingredientForm",  { static: false })
   ingredientForm!:NgForm;
+
+  @Output()
+  addIngredientEmitter: EventEmitter<number> = new EventEmitter<number>();
 
   ingredient!:Ingredients;
   isFormVisible:boolean=false;
 
-  constructor(private service:ReceipeServiceService, private router:Router) { }
+  constructor(private service:ReceipeServiceService) { }
 
   ngOnInit(): void {
     setTimeout(()=>{
@@ -28,28 +31,30 @@ export class AddIngredientComponent implements OnInit {
   }
 
   setDefaultForm(){
-    this.ingredient = new Ingredients("", "");
+    this.ingredient = new Ingredients("", "", "");
+    console.log("setDefaultForm", this.ingredient, this.ingredientForm);
     this.ingredientForm.setValue(this.ingredient);
   }
 
   onIngredientClick(){
     this.isFormVisible = true;
   }
-
-  onSubmit(){
+  onCancelClick(){
     this.isFormVisible = false;
-    console.log("onSubmit called");
+  }
+  onSubmit(){
     console.log(this.ingredientForm.value);
     this.service.addOneIngredient(this.receipeId, this.ingredientForm.value).subscribe({
       next:(result)=>{
-        this.router.navigate(['/receipes/'+this.receipeId]);
-        this.setDefaultForm();
       }, 
       error:(err)=>{
         console.log("Find an error", err);
+        this.addIngredientEmitter.emit(500);
       },
       complete:()=>{
+        this.addIngredientEmitter.emit(200);
         console.log("Get All Receipe Completed");
+        this.isFormVisible = false;
       }
     });
   }
