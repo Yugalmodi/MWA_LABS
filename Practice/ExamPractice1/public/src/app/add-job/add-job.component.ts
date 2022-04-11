@@ -15,10 +15,26 @@ export class AddJobComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  setDefaultValueForm(){
+    let location ={
+        address: "",
+        city:"",
+        state:"",
+        zip:"",
+        country:"",
+        skills:"",
+        title:"",
+        salary:"",
+        description:"",
+        experience:""
+    }
+    this.addJobForm.setValue(location);
+  }
   onAdd(){
     console.log(this.addJobForm.value);
     this.service.addOneJob(this.addJobForm.value).subscribe({
       next:()=>{
+        this.setDefaultValueForm();
         console.log("Added succedsfullly");
       },
       error:(err)=>{
