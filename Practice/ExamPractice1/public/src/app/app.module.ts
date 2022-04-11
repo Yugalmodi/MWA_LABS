@@ -10,6 +10,7 @@ import { OneJobComponent } from './one-job/one-job.component';
 import { RouterModule } from '@angular/router';
 import { AddJobComponent } from './add-job/add-job.component';
 import { FormsModule } from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination'
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    NgxPaginationModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([

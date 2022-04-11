@@ -1,5 +1,9 @@
 <ul>
-    <li *ngFor="let job of jobs">
+    <li *ngFor="let job of jobs  | paginate: { id: 'foo',
+    itemsPerPage: pageSize,
+    currentPage: page,
+    totalItems: count }">
         <a routerLink="/jobs/{{job._id}}" >{{job.title}}</a>
     </li>
 </ul>
+<pagination-controls id="foo" (pageChange)="handelPageChange($event)"></pagination-controls>

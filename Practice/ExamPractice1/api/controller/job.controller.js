@@ -55,22 +55,64 @@ const getAllJobs = function(req, res){
     const myContainer = _getDefaultResponse();
     let offset = 0;
     let count = 3; 
+    let maxCount = 10 ;
+    if(req.query && req.query.offset){
+        offset = parseInt(req.query.offset);
+    }
+    if(req.query && req.query.count){
+        count = parseInt(req.query.count);
+    }
+    if(isNaN(offset) || isNaN(count)){
+        response.status = 400;
+        response.message = process.env.MSG_RES_NaN;
+    } else{
+        count = Math.abs(count);
+        offset = Math.abs(offset);
+        if(count>maxCount){
+            count = maxCount;
+        }
+    }
     let duration = parseInt(req.query.duration) || 0;
     let query=null;
-    if(isNaN(duration) || duration>6){
+    if(myContainer.status==200 && (isNaN(duration) || duration>6)){
         myContainer.status = 400;
         myContainer.message = process.env.RES_DURATION;
     } 
     if(myContainer.status==200 && duration>0 && duration<=6){
-        count = 99999999999;
+        // count = 99999999999;
         let date = new Date();
         date.setMonth(date.getMonth()-duration);
         query = {postDate:{
             $gte: date //gte for after assigned date, lte for before assigned date
         }}
     }
+    console.log(offset, count);
     if(myContainer.status==200){
-        JOBS.find(query).skip(offset).limit(count).exec((err, result)=>_handleGetAllRes(err, result, res, myContainer));
+        // JOBS.find(query).skip(offset).limit(count).exec((err, result)=>_handleGetAllRes(err, result, res, myContainer));
+        JOBS.find().count().exec(function(err1,newCount){
+            if(err1){
+                myContainer.status = 500;
+                myContainer.message = err1;
+                console.log(err1);
+                res.status(myContainer.status).json(myContainer.message);
+                return;
+            }else{
+                console.log("inside else", offset, count);
+                JOBS.find().skip(offset).limit(count).exec(function(err,result){
+                    const response = {
+                        status : 200,
+                        message : {result,newCount}
+                    }
+                    if(err){
+                        response.status = 500;
+                        response.message = err;
+                        console.log(err);
+                    }
+                    // console.log("result length", result.length, response.message);
+                    res.status(response.status).json(response.message);
+                })
+            }
+        });
     } else{
         _terminate(res, myContainer.status, myContainer.message);
     }

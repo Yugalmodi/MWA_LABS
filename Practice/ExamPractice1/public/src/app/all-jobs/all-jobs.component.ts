@@ -46,7 +46,8 @@ export class Job {
   styleUrls: ['./all-jobs.component.css']
 })
 export class AllJobsComponent implements OnInit {
-  jobs!:Job[];
+  // jobs!:Job[];
+  jobs : Job[] = [];
   duration:number = 0;
   constructor(private service:JobsService, private route:ActivatedRoute) { }
 
@@ -57,18 +58,51 @@ export class AllJobsComponent implements OnInit {
   }
 
   getJobsFromServer(duration:number){
-    this.service.getAllJobs(duration).subscribe({
-      next:(result)=>{
+    const params = this.getRequestParams(this.page, this.pageSize);
+    this.service.getAllJobs(duration, params).subscribe({
+      next:(results)=>{
+        const {result, newCount} = results;
         this.jobs = result;
+        this.count = newCount;
+        console.log(results, result, newCount);
+        
       },
       error:(err)=>{
         console.log("Get All Jobs errro", err);
         
       },
       complete:()=>{
-        console.log("GetAllJobs Completed");
-        
+        console.log("GetAllJobs Completed"); 
       }
     });
+  }
+
+
+  /////
+  //PAGINATION
+  ///
+  page:number = 0;
+  count:number = 1;
+  pageSize:number = 5;
+  handelPageChange(event:any){
+    this.page = event;
+    this.getJobsFromServer(0);
+  }
+  handlePageSizeChange(event: any): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.getJobsFromServer(0);
+  }
+  
+  getRequestParams(page: number, pageSize: number): any {
+    let params: any = {};
+    console.log(page, pageSize);
+    if (page) {
+      params[`offset`] = pageSize*(page-1);
+    }
+    if (pageSize) {
+      params[`count`] = pageSize;
+    }
+    return params;
   }
 }
