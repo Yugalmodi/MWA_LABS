@@ -43,6 +43,7 @@ const _handleGetAllRes = function (err, result, res, myContainer){
     if(err){
         myContainer.status = 500;
         myContainer.message = err;
+        // console.log(err);
     } else{
         myContainer.status = 200;
         myContainer.message = result;
@@ -52,11 +53,33 @@ const _handleGetAllRes = function (err, result, res, myContainer){
 
 const getAllJobs = function(req, res){
     const myContainer = _getDefaultResponse();
-    const offset = 0;
-    const count = 15; 
-    JOBS.find().skip(offset).limit(count).exec((err, result)=>_handleGetAllRes(err, result, res, myContainer));
+    let offset = 0;
+    let count = 3; 
+    let duration = parseInt(req.query.duration) || 0;
+    let query=null;
+    if(isNaN(duration) || duration>6){
+        myContainer.status = 400;
+        myContainer.message = process.env.RES_DURATION;
+    } 
+    if(myContainer.status==200 && duration>0 && duration<=6){
+        count = 99999999999;
+        let date = new Date();
+        date.setMonth(date.getMonth()-duration);
+        query = {postDate:{
+            $gte: date //gte for after assigned date, lte for before assigned date
+        }}
+    }
+    if(myContainer.status==200){
+        JOBS.find(query).skip(offset).limit(count).exec((err, result)=>_handleGetAllRes(err, result, res, myContainer));
+    } else{
+        _terminate(res, myContainer.status, myContainer.message);
+    }
 }
 
+const getAllState = function(req, res){
+    const myContainer = _getDefaultResponse();
+    JOBS.find().distinct('location.state').exec((err, result)=>_handleGetAllRes(err, result, res, myContainer));
+}
 const _handleGetOneJob = function(err, result, res, myContainer){
     if(err){
         myContainer.status = 500;
@@ -88,5 +111,5 @@ function _getDefaultResponse(){
     }
 }
 module.exports = {
-    addOneJob, getAllJobs, getOneJob
+    addOneJob, getAllJobs, getAllState, getOneJob
 }

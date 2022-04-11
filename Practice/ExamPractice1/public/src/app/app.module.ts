@@ -34,6 +34,10 @@ import { FormsModule } from '@angular/forms';
         component:AllJobsComponent
       },
       {
+        path:"alljobs/:duration",
+        component:AllJobsComponent
+      },
+      {
         path:"jobs/:jobId",
         component:OneJobComponent
       },

@@ -11,8 +11,11 @@ export class JobsService {
 
   constructor(private http:HttpClient) { }
 
-  getAllJobs():Observable<Job[]>{
-    const url = environment.BASE_URL+"jobs";
+  getAllJobs(duration:number):Observable<Job[]>{
+    let url = environment.BASE_URL+"jobs";
+    if(duration>0){
+      url = url+"?duration="+duration;
+    }
     return this.http.get<Job[]>(url);
   }
   getOneJob(jobId:string):Observable<Job>{

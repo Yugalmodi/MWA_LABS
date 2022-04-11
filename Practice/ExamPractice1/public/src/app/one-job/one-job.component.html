@@ -1,9 +1,9 @@
 <H1>{{job.title}}</H1>
-Salary :- {{job.salary}}<br>
+Salary :- {{job.salary | currency:'USD'}}<br>
 Description :- {{job.description}}<br>
 Experience :- {{job.experience}}<br>
 Skills :- {{job.skills}}<br>
-PostDate :- {{job.postDate}}<br>
+PostDate :- {{job.postDate | date: 'MMM dd, YYYY'}}<br>
 
 <div *ngIf="job.location"> Location :- <br>
     Address :- {{job.location.address}}<br>

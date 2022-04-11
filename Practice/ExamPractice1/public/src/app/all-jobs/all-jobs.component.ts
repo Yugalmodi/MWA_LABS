@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { JobsService } from '../jobs.service';
 
 export class Location {
@@ -46,15 +47,17 @@ export class Job {
 })
 export class AllJobsComponent implements OnInit {
   jobs!:Job[];
-
-  constructor(private service:JobsService) { }
+  duration:number = 0;
+  constructor(private service:JobsService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getJobsFromServer();
+    const duration:number = this.route.snapshot.params["duration"] || 0;
+    console.log(duration);
+    this.getJobsFromServer(duration);
   }
 
-  getJobsFromServer(){
-    this.service.getAllJobs().subscribe({
+  getJobsFromServer(duration:number){
+    this.service.getAllJobs(duration).subscribe({
       next:(result)=>{
         this.jobs = result;
       },
