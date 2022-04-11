@@ -42,35 +42,30 @@ export class AllReceipesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getAllReceipe().subscribe({
-      next:(result)=>{
-        this.receipes = result;
-        console.log(this.receipes);
-      }, 
-      error:(err)=>{
-        console.log("Find an error", err);
-      },
-      complete:()=>{
-        console.log("Get All Receipe Completed");
-      }
+    this.getDataFromServer("","");
+  }
+
+  getDataFromServer(searchBy:string, query:string){
+    this.service.getAllReceipe(this.ngSelectCount, searchBy, query).subscribe({
+        next:(result)=>{
+          this.receipes = result;
+          console.log(this.receipes);
+        }, 
+        error:(err)=>{
+          console.log("Find an error", err);
+        },
+        complete:()=>{
+          console.log("Get All Receipe Completed");
+        }
     });
   }
 
   onSearch(formData:NgForm){
     console.log(formData.value, this.ngSelectCount);
+    this.getDataFromServer(formData.value.searchBy, formData.value.search_query);
+  }
 
-    this.service.getAllReceipeBySearch(formData.value.searchBy, 
-          formData.value.search_query, this.ngSelectCount).subscribe({
-      next:(result)=>{
-        this.receipes = result;
-        console.log(this.receipes);
-      }, 
-      error:(err)=>{
-        console.log("Find an error", err);
-      },
-      complete:()=>{
-        console.log("Get All Receipe Completed");
-      }
-    });
+  onDisplay(){
+    this.getDataFromServer("","");
   }
 }

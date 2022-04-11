@@ -16,6 +16,7 @@ Display item:-
         {{count}}
     </option>
 </select>
+<button (click)="onDisplay()">Display</button>
 <ul>
     <li *ngFor="let receipe of receipes">
         <a routerLink="/receipes/{{receipe._id}}">{{receipe.name}}</a>

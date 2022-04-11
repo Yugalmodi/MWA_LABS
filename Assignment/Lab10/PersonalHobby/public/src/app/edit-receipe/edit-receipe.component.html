@@ -1,4 +1,4 @@
-<button *ngIf="!isFormVisible" (click)="onEditClick()">Edit</button>
+<button *ngIf="!isFormVisible" (click)="onEditClick()">Edit Receipe</button>
 <div *ngIf="isFormVisible" >
     <form  #editReceipeForm="ngForm" (ngSubmit)="onUpdateClick()">
         <div>

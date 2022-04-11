@@ -1,8 +1,9 @@
 <H1>{{receipe.name}}</H1>
+Country:- {{receipe.country}}
+<app-edit-receipe [receipeId]="receipe._id"  [receipe]="receipe" (editReceipeEmitter)="onReceipeChange($event)"></app-edit-receipe>
+   
+<br>
 
-<!-- <app-edit-receipe [receipeId]="receipe._id"  [receipe]="receipe" (editReceipeEmitter)="onReceipeChange($event)"></app-edit-receipe> -->
-
-Country:- {{receipe.country}}<br>
 Ingredients:- 
 <app-add-ingredient [receipeId]="receipe._id" (addIngredientEmitter)="onIngredientChange($event)"></app-add-ingredient>
 <ul>
@@ -17,5 +18,3 @@ Ingredients:-
     </li>
 </ul>
 <app-delete-receipe [receipeId]="receipe._id"></app-delete-receipe>
-<app-edit-receipe [receipeId]="receipe._id"  [receipe]="receipe" (editReceipeEmitter)="onReceipeChange($event)"></app-edit-receipe>
-   

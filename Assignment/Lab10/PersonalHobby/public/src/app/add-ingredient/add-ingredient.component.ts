@@ -13,7 +13,7 @@ export class AddIngredientComponent implements OnInit, AfterViewInit {
   @Input()
   receipeId!:string;
 
-  @ViewChild("addIngredientForm", {static: false})
+  @ViewChild("addIngredientForm")
   addIngredientForm!:NgForm;
 
   @Output()

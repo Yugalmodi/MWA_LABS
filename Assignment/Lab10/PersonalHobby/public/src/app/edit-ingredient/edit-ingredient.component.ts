@@ -15,7 +15,7 @@ export class EditIngredientComponent implements OnInit, AfterViewInit {
   @Input()
   ingredient!:Ingredients;
 
-  @ViewChild("editIngredientForm", {static: true})
+  @ViewChild("editIngredientForm")
   editIngredientForm!:NgForm;
 
   @Output()

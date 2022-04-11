@@ -154,17 +154,13 @@ const _update = function(req, res, udpateReceipe){
     }
 }
 const _fullUpdateReceipe = function(receipe, req){
-    console.log("_fullUpdateReceipe - start ", receipe, req.body);
     receipe.name = req.body.name;
     receipe.country = req.body.country;
-    console.log("_fullUpdateReceipe - end", receipe);
     return receipe;
 }
 const _partialUpdateReceipe = function(receipe, req){
-    console.log("_partialUpdateReceipe - start ", receipe, req.body);
     receipe.name = req.body.name || receipe.name ;
     receipe.country = req.body.country || receipe.country;
-    console.log("_partialUpdateReceipe - end", receipe);
     return receipe;
 }
 const fullUpdateOne= function(req, res){

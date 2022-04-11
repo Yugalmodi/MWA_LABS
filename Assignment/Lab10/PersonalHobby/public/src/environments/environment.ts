@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BASE_URL:"Please pass your backedn Server"
+  BASE_URL:"Please pass your backend Server Link",
 };
 
 /*
