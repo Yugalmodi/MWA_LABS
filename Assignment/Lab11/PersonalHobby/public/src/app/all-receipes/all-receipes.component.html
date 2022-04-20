@@ -1,22 +1,8 @@
-<div>
-    <form #searchForm="ngForm" (ngSubmit)="onSearch(searchForm)">
-        Search:- 
-        <select  [(ngModel)]='ngSelectSearch' name="searchBy" ngModel>
-            <option *ngFor="let item of searchList">
-                {{item}}
-            </option>
-        </select>
-        <input name="search_query" ngModel>
-        <button type="submit">Search</button>
-    </form>
-</div>
-Display item:- 
-<select [(ngModel)]='ngSelectCount' name="count" ngModel>
+<select [ngModel]="ngSelectCount" (ngModelChange)="onChange($event)" >
     <option *ngFor="let count of countList">
         {{count}}
     </option>
 </select>
-<button (click)="onDisplay()">Display</button>
 <ul>
     <li *ngFor="let receipe of receipes">
         <a routerLink="/receipes/{{receipe._id}}">{{receipe.name}}</a>

@@ -13,7 +13,7 @@ export class ReceipeServiceService {
   constructor(private http:HttpClient) { }
 
   getAllReceipe(count:number, searchBy:string, query:string):Observable<Receipe[]>{
-    if(query!=''){
+    if(query && query!=''){
       query = searchBy+"="+query;
     } else if(!count){
       query = "count="+count;

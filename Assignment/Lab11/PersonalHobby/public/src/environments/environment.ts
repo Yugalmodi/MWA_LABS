@@ -5,6 +5,10 @@
 export const environment = {
   production: false,
   BASE_URL:"Please pass your backend Server Link",
+  URL_REGISTER:"Please pass backend Server Link for USER RESGISTRATION",
+  URL_LOGIN:"Please pass backend Server Link for LOGIN",
+  REGIS_SUCCESS:"Regitration Done Succesfully",
+  LOGIN_SUCCESS:"Login Succesfully"
 };
 
 /*

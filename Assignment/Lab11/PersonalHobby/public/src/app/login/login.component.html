@@ -1,11 +1,22 @@
-<form #loginForm="ngForm" (ngSubmit)="onLoginClick()">
-    <label>
-        username:
-        <input name="username" ngModel/>
-    </label>
-    <label>
-        password:
-        <input name="password" ngModel/>
-    </label>
-    <button type="submit">Login</button>
-</form>
+<div>
+    <form #loginForm="ngForm" (ngSubmit)="onLoginClick(loginForm)">
+        <label>
+            username:
+            <input name="username" ngModel/>
+        </label>
+        <label>
+            password:
+            <input type="password" name="password" ngModel/>
+        </label>
+        <button type="submit">Login</button>
+    </form>
+    
+    <div >
+        <div *ngIf="isError" class="alert alert-dismissible alert-danger">
+            {{notificationMessage}}
+        </div>
+        <div *ngIf="isSuccess" class="alert alert-dismissible alert-success">
+            {{notificationMessage}}
+        </div>
+    </div>
+</div>

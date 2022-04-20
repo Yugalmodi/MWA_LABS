@@ -18,6 +18,7 @@ import { AddIngredientComponent } from './add-ingredient/add-ingredient.componen
 import { EditReceipeComponent } from './edit-receipe/edit-receipe.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
+import { SearchReceipeComponent } from './search-receipe/search-receipe.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LoginComponent } from './login/login.component';
     AddIngredientComponent,
     EditReceipeComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    SearchReceipeComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +58,14 @@ import { LoginComponent } from './login/login.component';
       {
         path:"addNew",
         component:AddReceipeComponent
+      },
+      {
+        path:"register",
+        component:RegistrationComponent
+      },
+      {
+        path:"search",
+        component:SearchReceipeComponent
       },
       {
         path:"**",

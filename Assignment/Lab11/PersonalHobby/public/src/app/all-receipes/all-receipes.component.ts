@@ -34,19 +34,17 @@ export class Receipe {
 })
 export class AllReceipesComponent implements OnInit {
   receipes!:Receipe[];
-  searchList:string[] = ["name","country"];
   countList:number[] = [3, 5, 8, 10];
-  ngSelectSearch = this.searchList[0];
   ngSelectCount = this.countList[0];
   constructor(private service:ReceipeServiceService) { 
   }
 
   ngOnInit(): void {
-    this.getDataFromServer("","");
+    this.getDataFromServer();
   }
 
-  getDataFromServer(searchBy:string, query:string){
-    this.service.getAllReceipe(this.ngSelectCount, searchBy, query).subscribe({
+  getDataFromServer(){
+    this.service.getAllReceipe(this.ngSelectCount, '', '').subscribe({
         next:(result)=>{
           this.receipes = result;
           console.log(this.receipes);
@@ -59,13 +57,8 @@ export class AllReceipesComponent implements OnInit {
         }
     });
   }
-
-  onSearch(formData:NgForm){
-    console.log(formData.value, this.ngSelectCount);
-    this.getDataFromServer(formData.value.searchBy, formData.value.search_query);
-  }
-
-  onDisplay(){
-    this.getDataFromServer("","");
+  onChange(value:any){
+    this.ngSelectCount = value;
+    this.getDataFromServer();
   }
 }
