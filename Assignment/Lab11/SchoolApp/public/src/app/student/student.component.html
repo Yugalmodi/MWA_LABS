@@ -1,0 +1,9 @@
+<H1>{{student.name}}</H1>
+GPA:- {{student.gpa}}<br>
+Courses:- 
+<ul>
+    <li *ngFor="let course of student.courses">
+        name:- {{course.name}}
+        Duration:- {{course.duration}}
+    </li>
+</ul>

@@ -47,10 +47,25 @@ Assignment/Lab10/SchoolApp/package-lock.json
 Assignment/Lab10/SchoolApp/public/node_modules
 Assignment/Lab10/SchoolApp/public/package-lock.json
 
+Assignment/Lab11/PersonalHobby/node_modules
+Assignment/Lab11/PersonalHobby/package-lock.json
+Assignment/Lab11/PersonalHobby/public/node_modules
+Assignment/Lab11/PersonalHobby/public/package-lock.json
+
+Assignment/Lab11/SchoolApp/node_modules
+Assignment/Lab11/SchoolApp/package-lock.json
+Assignment/Lab11/SchoolApp/public/node_modules
+Assignment/Lab11/SchoolApp/public/package-lock.json
+
 Practice/ExamPractice1/node_modules
 Practice/ExamPractice1/package-lock.json
 Practice/ExamPractice1/public/node_modules
 Practice/ExamPractice1/public/package-lock.json
+
+Practice/ExamPrac2/node_modules
+Practice/ExamPrac2/package-lock.json
+Practice/ExamPrac2/public/node_modules
+Practice/ExamPrac2/public/package-lock.json
 
 Practice/AngPro2/public/node_modules
 Practice/AngPro2/public/package-lock.json
@@ -67,3 +82,5 @@ Class/MEAN_GAME/
 Assignment/Lab05/
 
 Class/
+Exam/
+Practice/

@@ -1,0 +1,19 @@
+<button *ngIf="!isFormVisible" (click)="onIngredientClick()">Edit</button>
+<div *ngIf="isFormVisible" >
+    <form  #editIngredientForm="ngForm" (ngSubmit)="onEditClick()">
+        <div>
+            <label>
+                Name:
+                <input name="name" placeholder="name" ngModel/>
+            </label>
+            <label>
+                Color:
+                <input name="color" placeholder="color" ngModel/>
+            </label>
+            <input  type="hidden" name="_id" ngModel/>
+            <button type="submit">Update</button>
+            <button (click)="onCancel()">Cancel</button>
+            <button (click)="onDelete()">Delete</button>
+        </div>
+    </form>
+</div>

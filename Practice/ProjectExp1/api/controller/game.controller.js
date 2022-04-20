@@ -100,20 +100,21 @@ const addOne = function(req, res){
     Game.create(newGame, (err, result)=>_handleAddOne(err, result, res, myContainer));
 }
 
-const _handlegeOne = function(err, result, myContainer){
+const _handleGetOne = function(err, result, myContainer, res){
     if(err){
-                res.status(500).json({error:err.message});
-            } else{
-                res.status(201).json(games);
-            }
+        myContainer.status = 500;
+        myContainer.message = {error:err.message};
+    } else{
+        myContainer.status = 400;
+        myContainer.message = result;
+    }
+    _terminate(myContainer, res);
 }
 const getOne = function(req, res){
     const myContainer = _getContainer();
     let gameId = req.params.gameId;
     if(mongoose.isValidObjectId(gameId)){
-        Game.findById(gameId).exec(function(err, games){
-            
-        });
+        Game.findById(gameId).exec((err, result)=> _handleGetOne(err, result, myContainer, res));
     } else{
         myContainer.status = 400;
         myContainer.message = process.env.MSG_RES_INV_GAME_ID;

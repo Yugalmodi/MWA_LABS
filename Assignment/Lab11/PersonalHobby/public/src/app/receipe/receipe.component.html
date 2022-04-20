@@ -1,0 +1,20 @@
+<H1>{{receipe.name}}</H1>
+Country:- {{receipe.country}}
+<app-edit-receipe [receipeId]="receipe._id"  [receipe]="receipe" (editReceipeEmitter)="onReceipeChange($event)"></app-edit-receipe>
+   
+<br>
+
+Ingredients:- 
+<app-add-ingredient [receipeId]="receipe._id" (addIngredientEmitter)="onIngredientChange($event)"></app-add-ingredient>
+<ul>
+    <li *ngFor="let ingredient of receipe.ingredients">
+        <div>
+            <span>name:-{{ingredient.name}}</span> 
+            <br>
+            <span *ngIf="ingredient.color">color:-{{ingredient.color}}</span>
+        </div>
+
+        <app-edit-ingredient [receipeId]="receipe._id"  [ingredient]="ingredient" (editIngredientEmitter)="onIngredientChange($event)"></app-edit-ingredient>
+    </li>
+</ul>
+<app-delete-receipe [receipeId]="receipe._id"></app-delete-receipe>

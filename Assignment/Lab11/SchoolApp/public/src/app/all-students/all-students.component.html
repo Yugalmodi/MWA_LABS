@@ -1,0 +1,5 @@
+<ul>
+    <li *ngFor="let student of students">
+        <a routerLink="/students/{{student._id}}" >{{student.name}}</a>
+    </li>
+</ul>

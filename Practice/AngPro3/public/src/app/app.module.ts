@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavigateComponent } from './navigate/navigate.component';
@@ -13,6 +13,7 @@ import { GameComponent } from './game/game.component';
 import { RatingComponent } from './rating/rating.component';
 import { DeleteComponent } from './delete/delete.component';
 import { CreateGameComponent } from './create-game/create-game.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -24,12 +25,14 @@ import { CreateGameComponent } from './create-game/create-game.component';
     GameComponent,
     RatingComponent,
     DeleteComponent,
-    CreateGameComponent
+    CreateGameComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule.forRoot([
       {
         path:"",
@@ -38,6 +41,10 @@ import { CreateGameComponent } from './create-game/create-game.component';
       {
         path:"games",
         component:GamesListComponent
+      },
+      {
+        path:"registration",
+        component:RegistrationComponent
       },
       {
         path:"games/:gameId",

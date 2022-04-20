@@ -9,9 +9,11 @@ app.use(express.urlencoded({extended:true}));
 
 app.use("/api", function(req, res, next){
     res.header('Access-Control-Allow-Origin','http://localhost:4200');
-    res.header('Access-Control-Allow-Methods','GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Headers',
-            'Content-Type,X-Requested-With,cache-control,pragma, Origin, Accept');
+    // res.header('Access-Control-Allow-Methods','GET, POST, PUT, PATCH, DELETE');
+    // res.header('Access-Control-Allow-Headers',
+    //         'Content-Type,X-Requested-With,cache-control,pragma, Origin, Accept');
+    res.header('Access-Control-Allow-Methods','*');
+    res.header('Access-Control-Allow-Headers','*');
     next();
 });
 

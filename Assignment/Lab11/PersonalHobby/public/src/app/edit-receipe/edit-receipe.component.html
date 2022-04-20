@@ -1,0 +1,20 @@
+<button *ngIf="!isFormVisible" (click)="onEditClick()">Edit Receipe</button>
+<div *ngIf="isFormVisible" >
+    <form  #editReceipeForm="ngForm" (ngSubmit)="onUpdateClick()">
+        <div>
+            <label>
+                Name:
+                <input name="name" placeholder="name" ngModel/>
+            </label>
+            <label>
+                Country:
+                <input name="country" placeholder="country" ngModel/>
+            </label>
+            <input  type="hidden" name="_id" ngModel/>
+            <input  type="hidden" name="ingredients" ngModel/>
+            <button type="submit">Update</button>
+            <button (click)="onCancel()">Cancel</button>
+            <!-- <button (click)="onDelete()">Delete</button> -->
+        </div>
+    </form>
+</div>

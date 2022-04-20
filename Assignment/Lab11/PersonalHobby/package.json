@@ -1,0 +1,26 @@
+{
+  "name": "app.js",
+  "version": "1.0.0",
+  "description": "PHP Personal Hobby Project (Cooking )",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon --inspect",
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "MongoDB",
+    "Mongoose"
+  ],
+  "author": "Yugal Modi",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.0",
+    "dotenv-expand": "^8.0.3",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.9"
+  }
+}
