@@ -6,6 +6,14 @@ import { AuthService } from '../auth.service';
 import { UserCredential } from '../registration/registration.component';
 import { UsersService } from '../users.service';
 
+export class LoginResponse{
+  Success!:boolean;
+  token!:string;
+  constructor(Success:boolean, token:string){
+    this.Success = Success;
+    this.token = token;
+  }
+}
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -29,13 +37,11 @@ export class LoginComponent implements OnInit {
 
   onLoginClick(myForm:NgForm){
     this.userService.login(this.fillForm(myForm.value)).subscribe({
-      next:(loginResponse)=>{
+      next:(loginResponse:LoginResponse)=>{
+        console.log("next", loginResponse);
         this.authservice.token = loginResponse.token;
         this.authservice.isLoggedIn = true;
-        console.log(this.authservice.isLoggedIn );
         this.router.navigate(["/"]);
-        // console.log("next", loginResponse);
-        // this.displayMessage(environment.LOGIN_SUCCESS, false);
       }, 
       error:(err)=>{
         this.displayMessage(err.error, true);

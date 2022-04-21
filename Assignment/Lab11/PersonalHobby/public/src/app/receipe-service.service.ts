@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { Observable } from 'rxjs';
 
 import { Ingredients, Receipe } from './all-receipes/all-receipes.component';
-import { environment } from 'src/environments/environment.dev';
+import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -26,35 +26,35 @@ export class ReceipeServiceService {
     return this.http.get<Receipe>(url);
   }
 
-  deleteOneReceipe(receipeId:string):Observable<any>{
+  deleteOneReceipe(receipeId:string):Observable<string>{
     const url= environment.BASE_URL+"receipes/"+receipeId;
-    return this.http.delete<any>(url, this._authService.geTokenHeader());
+    return this.http.delete<string>(url, this._authService.geTokenHeader());
   }
 
-  addOneReceipe(receipe:Receipe):Observable<any>{
+  addOneReceipe(receipe:Receipe):Observable<string>{
     const url= environment.BASE_URL+"receipes";    
-    return this.http.post<any>(url, receipe, this._authService.geTokenHeader()); 
+    return this.http.post<string>(url, receipe, this._authService.geTokenHeader()); 
   }
 
-  editOneReceipe(receipeId:string, receipe:Receipe):Observable<any>{
+  editOneReceipe(receipeId:string, receipe:Receipe):Observable<string>{
     const url= environment.BASE_URL+"receipes/"+receipeId;
     console.log("editOneReceipe", url, receipeId, receipe);
-    return this.http.patch<any>(url, receipe, this._authService.geTokenHeader()); 
+    return this.http.patch<string>(url, receipe, this._authService.geTokenHeader()); 
   }
 
-  addOneIngredient(receipeId:string, ingredient:Ingredients):Observable<any>{
+  addOneIngredient(receipeId:string, ingredient:Ingredients):Observable<string>{
     const url= environment.BASE_URL+"receipes/"+receipeId+"/ingredients";
-    return this.http.post<any>(url, ingredient, this._authService.geTokenHeader()); 
+    return this.http.post<string>(url, ingredient, this._authService.geTokenHeader()); 
   }
 
-  editOneIngredient(receipeId:string, ingredientId:string, ingredient:Ingredients):Observable<any>{
+  editOneIngredient(receipeId:string, ingredientId:string, ingredient:Ingredients):Observable<string>{
     const url= environment.BASE_URL+"receipes/"+receipeId+"/ingredients/"+ingredientId;    
-    return this.http.patch<any>(url, ingredient, this._authService.geTokenHeader()); 
+    return this.http.patch<string>(url, ingredient, this._authService.geTokenHeader()); 
   }
 
-  deleteOneIngredient(receipeId:string, ingredientId:string):Observable<any>{
+  deleteOneIngredient(receipeId:string, ingredientId:string):Observable<string>{
     const url= environment.BASE_URL+"receipes/"+receipeId+"/ingredients/"+ingredientId;
-    return this.http.delete<any>(url, this._authService.geTokenHeader());
+    return this.http.delete<string>(url, this._authService.geTokenHeader());
   }
 
 

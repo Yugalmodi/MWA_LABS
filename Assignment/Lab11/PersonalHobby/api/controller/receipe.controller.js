@@ -85,9 +85,9 @@ const  _getQuery = function(response){
             }
         }
     } else if(response.name!=null){
-        query={name:response.name}
+        query={name:{$regex: response.name}}
     } else if(response.country!=null){
-        query={country:response.country}
+        query={country:{$regex: response.country}}
     }
     return query;
 }

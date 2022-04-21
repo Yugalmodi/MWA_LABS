@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { environment } from 'src/environments/environment.dev';
+import { environment } from 'src/environments/environment';
 import { UsersService } from '../users.service';
 
 export class UserCredential{

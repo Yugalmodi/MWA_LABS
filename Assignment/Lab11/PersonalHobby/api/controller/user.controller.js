@@ -13,15 +13,13 @@ const addOne = function (req, res){
         };
         bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS))
             .then((salt)=>{
-                console.log("salt", salt);
                 return bcrypt.hash(req.body.password, salt);
             })
             .then((hashPassword)=>{
-                console.log("hashPassword", hashPassword);
                 newUser.password = hashPassword;
                 return USERS.create(newUser);
             })
-            .then(()=>myUtils.updateMyResponse(response, "", process.env.RES_STATUS_CODE_SUCC_NO_CONTENT))
+            .then(()=>myUtils.updateMyResponse(response, process.env.MSG_RES_NEW_USER_SUCC, process.env.RES_STATUS_CODE_SUCC_NO_CONTENT))
             .catch((err)=>myUtils.updateMyResponse(response, err, process.env.RES_STATUS_CODE_ERR_SERVER))
             .finally(()=>myUtils.terminate(res, response));
     } else{
@@ -31,9 +29,8 @@ const addOne = function (req, res){
 }
 
 const _comparePasswordAndUpdateResponse = function(response, result, username){
-    console.log("_comparePasswordAndUpdateResponse", result);
     if(result){
-        const token = jwt.sign({username:username}, process.env.JWT_TOKEN_SECRET, {expiresIn:'1800s'});
+        const token = jwt.sign({username:username}, process.env.JWT_TOKEN_SECRET, {expiresIn:process.env.AUTH_TOKEN_DEF_EXPIRY_TIME_SEC});
         const message = {
             Success:true,
             token:token

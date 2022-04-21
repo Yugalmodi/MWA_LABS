@@ -30,13 +30,12 @@ export class AddIngredientComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     console.log("ngOnInit", this.addIngredientForm);
     setTimeout(()=>{
-      this.setDefaultForm();
+      // this.setDefaultForm();
     }, 0)
   }
 
   setDefaultForm(){
     this.ingredient = new Ingredients("", "", "");
-    console.log("setDefaultForm", this.ingredient, this.addIngredientForm);
     this.addIngredientForm.setValue(this.ingredient);
   }
 

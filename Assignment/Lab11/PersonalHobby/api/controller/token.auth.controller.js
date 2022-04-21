@@ -10,7 +10,6 @@ const _handleError = function(response, res){
 const authenticate= function(req, res, next){
     const response = myUtils.getDefaultResponse();
     const headerExist = req.headers.authorization;
-    console.log("authenticate", req.headers, headerExist);
     if(headerExist){
         const token = headerExist.split(" ")[1];
         const jwtVerifyPromise = util.promisify(jwt.verify, {context:jwt});
