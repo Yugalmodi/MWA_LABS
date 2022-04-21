@@ -12,13 +12,11 @@ import { environment } from 'src/environments/environment.dev';
 export class ReceipeServiceService {
   constructor(private http:HttpClient) { }
 
-  getAllReceipe(count:number, searchBy:string, query:string):Observable<Receipe[]>{
+  getAllReceipe(offset:number, count:number, searchBy:string, query:string):Observable<Receipe[]>{
     if(query && query!=''){
       query = searchBy+"="+query;
-    } else if(!count){
-      query = "count="+count;
     }
-    const url= environment.BASE_URL+"receipes?count="+count+"&"+query;
+    const url= environment.BASE_URL+"receipes?offset="+offset+"&count="+count+"&"+query;
     console.log("getAllReceipeBySearch", url, query);
     return this.http.get<Receipe[]>(url);
   }

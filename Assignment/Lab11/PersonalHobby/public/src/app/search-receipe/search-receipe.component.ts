@@ -25,7 +25,7 @@ export class SearchReceipeComponent implements OnInit {
   }
 
   getDataFromServer(searchBy:string, query:string){
-    this.service.getAllReceipe(this.ngSelectCount, searchBy, query).subscribe({
+    this.service.getAllReceipe(0, this.ngSelectCount, searchBy, query).subscribe({
         next:(result)=>{
           this.receipes = result;
           console.log(this.receipes);

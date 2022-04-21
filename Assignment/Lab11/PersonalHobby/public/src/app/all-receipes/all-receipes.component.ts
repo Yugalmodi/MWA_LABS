@@ -44,7 +44,9 @@ export class AllReceipesComponent implements OnInit {
   }
 
   getDataFromServer(){
-    this.service.getAllReceipe(this.ngSelectCount, '', '').subscribe({
+    console.log("getDataFromServer", this.offset, this.ngSelectCount);
+    
+    this.service.getAllReceipe(this.offset, this.ngSelectCount, '', '').subscribe({
         next:(result)=>{
           this.receipes = result;
           console.log(this.receipes);
@@ -58,7 +60,28 @@ export class AllReceipesComponent implements OnInit {
     });
   }
   onChange(value:any){
-    this.ngSelectCount = value;
+    this.ngSelectCount = Number(value);
+    this.getDataFromServer();
+  }
+
+  offset: number = 0;
+  disableNext: boolean = false;
+  disablePrev: boolean = true;
+
+  previous(): void {
+    if (this.offset > 0) {
+      this.offset = this.offset - this.ngSelectCount;
+    }
+    if (this.offset <= 0) {
+      this.offset = 0;
+      this.disablePrev = true;
+    }
+    this.getDataFromServer();
+  }
+
+  next(): void {    
+    this.offset = this.offset+this.ngSelectCount;
+    this.disablePrev = false;
     this.getDataFromServer();
   }
 }

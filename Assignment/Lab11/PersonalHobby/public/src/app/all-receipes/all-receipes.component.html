@@ -8,3 +8,6 @@
         <a routerLink="/receipes/{{receipe._id}}">{{receipe.name}}</a>
     </li>
 </ul>
+
+<button (click)="previous()" [disabled]="disablePrev">Previous</button>
+<button (click)="next()"  [disabled]="disableNext">Next</button>
