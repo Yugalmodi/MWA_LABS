@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,14 @@ export class AuthService {
   clearToken(){
     localStorage.clear();
     this.isLoggedIn = false;
+  }
+
+  geTokenHeader (){
+    let head = new HttpHeaders({
+      'Content-Type': `application/json`
+    }).set('Authorization',  `Bearer ${this.token}`)
+    return {
+        headers: head
+    }
   }
 }

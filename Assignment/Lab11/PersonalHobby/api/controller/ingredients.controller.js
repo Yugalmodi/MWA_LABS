@@ -124,23 +124,6 @@ const deleteOne = function(req, res){
     }
 }
 
-// const _responseAddIngridient = function(err, addedIngredient, res, req, response){
-//     response = _errValidations(false , err, addedIngredient, req, response);
-//     if(response.status==200){
-//         response.message = addedIngredient;
-//     }
-//     res.status(response.status).json(response.message);
-// }
-// const _responseAddOneGet = function(req, res, err, receipe, respone, _requiredReceipe){
-//     response = _errValidations( false , err, receipe, req, respone);
-//     if(response.status==200){
-//         _requiredReceipe(receipe, req).save(
-//             (err, addedIngredient)=>_responseAddIngridient(err, addedIngredient, res, req, response));
-//     } else{
-//         res.status(response.status).json(response.message);
-//     }
-// }
-
 const _checkIdNullAndUpdateResponseAddOne2 = function(response){
     if(response.status==process.env.RES_STATUS_CODE_SUCC){
         myUtils.updateMyResponse(response, "done", process.env.RES_STATUS_CODE_SUCC_NO_CONTENT)
@@ -148,7 +131,6 @@ const _checkIdNullAndUpdateResponseAddOne2 = function(response){
 }
 const _checkIdNullAndUpdateResponseAddOne = function(response, receipe, req, _requiredReceipeFun){
     const ingId = req.params.ingredientId;
-    console.log("_checkIdNullAndUpdateResponseAddOne", ingId);
     if(!receipe){
         myUtils.updateMyResponse(response, 
             process.env.MSG_RES_404_ID_REC, 
@@ -168,7 +150,7 @@ const _handleAdd = function(req, res, _requiredReceipeFun){
     if(response.status==200){
         Receipe.findById(response.receipeId).select(process.env.INGREDIENTS)
             .then((result)=>_checkIdNullAndUpdateResponseAddOne(response, result, req, _requiredReceipeFun))
-            .then((result)=>_checkIdNullAndUpdateResponseAddOne2(response))
+            .then(()=>_checkIdNullAndUpdateResponseAddOne2(response))
             .catch((err)=>myUtils.updateMyResponse(response, err, process.env.RES_STATUS_CODE_ERR_SERVER))
             .finally(()=>myUtils.terminate(res, response));
     } else{

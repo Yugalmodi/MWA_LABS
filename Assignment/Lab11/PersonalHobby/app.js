@@ -5,14 +5,14 @@ const express = require("express");
 const app = express();
 
 const _urlLogger = function(req, res, next){
-    console.log(req.method, "-", req.url);
+    console.log(req.method, "-", req.url, "---", req.headers.authorization);
     next();
 };
 const _handleCORSPolicy = function(req, res, next){
     res.header('Access-Control-Allow-Origin','http://localhost:4200');
     res.header('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE'); 
     res.header('Access-Control-Allow-Headers',
-            'Content-Type, X-Requested-With, cache-control, pragma, Origin, Accept');
+            'Content-Type, X-Requested-With, cache-control, pragma, Origin, Accept, Authorization');
     next();
 }
 

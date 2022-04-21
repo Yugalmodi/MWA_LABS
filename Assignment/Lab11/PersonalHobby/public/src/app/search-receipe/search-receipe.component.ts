@@ -38,5 +38,4 @@ export class SearchReceipeComponent implements OnInit {
         }
     });
   }
-
 }

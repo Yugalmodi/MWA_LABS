@@ -1,5 +1,4 @@
 function updateMyResponse(response, message, statusCode){
-    console.log(statusCode, message);
     response.status = parseInt(statusCode);
     response.message = message;
 }

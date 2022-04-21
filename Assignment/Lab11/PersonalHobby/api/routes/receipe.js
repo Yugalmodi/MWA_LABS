@@ -6,22 +6,22 @@ const tokenAuthController = require("../controller/token.auth.controller");
 
 Router.route("/")
     .get(controllerReceipe.getAll)
-    .post(/*tokenAuthController.validateToken,*/ controllerReceipe.addOne);
+    .post(tokenAuthController.validateToken, controllerReceipe.addOne);
 
 Router.route("/:"+process.env.RECEIPEID)
     .get(controllerReceipe.getOne)
-    .delete(controllerReceipe.deleteOne)
-    .put(controllerReceipe.fullUpdateOne)
-    .patch(controllerReceipe.partialUpdateOne); 
+    .delete(tokenAuthController.validateToken, controllerReceipe.deleteOne)
+    .put(tokenAuthController.validateToken, controllerReceipe.fullUpdateOne)
+    .patch(tokenAuthController.validateToken, controllerReceipe.partialUpdateOne); 
 
 Router.route("/:"+process.env.RECEIPEID+process.env.SUB_ROUTE_INGREDIENTS)
     .get(ingredientsController.getAll)
-    .post(ingredientsController.addOne); 
+    .post(tokenAuthController.validateToken, ingredientsController.addOne); 
     
 Router.route("/:"+process.env.RECEIPEID+process.env.SUB_ROUTE_INGREDIENTS+"/:"+process.env.INGREDIENTID)
     .get(ingredientsController.getOne)
-    .delete(ingredientsController.deleteOne)
-    .put(ingredientsController.fullUpdateOne)
-    .patch(ingredientsController.partialUpdateOne);
+    .delete(tokenAuthController.validateToken, ingredientsController.deleteOne)
+    .put(tokenAuthController.validateToken, ingredientsController.fullUpdateOne)
+    .patch(tokenAuthController.validateToken, ingredientsController.partialUpdateOne);
 
 module.exports = Router;
