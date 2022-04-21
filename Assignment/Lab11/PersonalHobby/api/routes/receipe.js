@@ -1,11 +1,12 @@
 const express = require("express");
 const Router = express.Router();
-const controllerReceipe = require("../controller/receipe.controller")
-const ingredientsController = require("../controller/ingredients.controller")
+const controllerReceipe = require("../controller/receipe.controller");
+const ingredientsController = require("../controller/ingredients.controller");
+const tokenAuthController = require("../controller/token.auth.controller");
 
 Router.route("/")
     .get(controllerReceipe.getAll)
-    .post(controllerReceipe.addOne);
+    .post(/*tokenAuthController.validateToken,*/ controllerReceipe.addOne);
 
 Router.route("/:"+process.env.RECEIPEID)
     .get(controllerReceipe.getOne)

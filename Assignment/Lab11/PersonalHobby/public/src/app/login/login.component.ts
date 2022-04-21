@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../auth.service';
 import { UserCredential } from '../registration/registration.component';
 import { UsersService } from '../users.service';
 
@@ -13,8 +15,14 @@ export class LoginComponent implements OnInit {
   notificationMessage!:string;
   isError:boolean = false;
   isSuccess:boolean = false;
+  get isLoggedIn(){
+    return this.authservice.isLoggedIn;
+  }
+  get username(){
+    return this.authservice.username;
+  }
 
-  constructor(private userService:UsersService) { }
+  constructor(private userService:UsersService, private authservice:AuthService, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -22,8 +30,12 @@ export class LoginComponent implements OnInit {
   onLoginClick(myForm:NgForm){
     this.userService.login(this.fillForm(myForm.value)).subscribe({
       next:(loginResponse)=>{
-        console.log("next", loginResponse);
-        this.displayMessage(environment.LOGIN_SUCCESS, false);
+        this.authservice.token = loginResponse.token;
+        this.authservice.isLoggedIn = true;
+        console.log(this.authservice.isLoggedIn );
+        this.router.navigate(["/"]);
+        // console.log("next", loginResponse);
+        // this.displayMessage(environment.LOGIN_SUCCESS, false);
       }, 
       error:(err)=>{
         this.displayMessage(err.error, true);
@@ -49,5 +61,10 @@ export class LoginComponent implements OnInit {
     console.log(formData);
     const userCredential:UserCredential = new UserCredential("","", formData.username, formData.password);
     return userCredential;
+  }
+  logoutCilck(){
+    this.authservice.clearToken();
+    this.authservice.isLoggedIn = false;
+    this.router.navigate(["/"]);
   }
 }

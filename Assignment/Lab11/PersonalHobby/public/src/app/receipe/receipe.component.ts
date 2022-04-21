@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Receipe } from '../all-receipes/all-receipes.component';
+import { AuthService } from '../auth.service';
 import { ReceipeServiceService } from '../receipe-service.service';
 
 @Component({
@@ -9,10 +10,14 @@ import { ReceipeServiceService } from '../receipe-service.service';
   styleUrls: ['./receipe.component.css']
 })
 export class ReceipeComponent implements OnInit {
+  get isLoggedIn(){
+    return this.authservice.isLoggedIn;
+  }
+
   receipe!:Receipe;
   receipeId!:string;
 
-  constructor(private activeRoute:ActivatedRoute, private service:ReceipeServiceService) { 
+  constructor(private activeRoute:ActivatedRoute, private service:ReceipeServiceService, private authservice:AuthService) { 
     this.receipe= new Receipe("", "", "", []);
   }
   

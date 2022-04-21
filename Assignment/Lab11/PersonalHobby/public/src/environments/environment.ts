@@ -8,7 +8,8 @@ export const environment = {
   URL_REGISTER:"Please pass backend Server Link for USER RESGISTRATION",
   URL_LOGIN:"Please pass backend Server Link for LOGIN",
   REGIS_SUCCESS:"Regitration Done Succesfully",
-  LOGIN_SUCCESS:"Login Succesfully"
+  LOGIN_SUCCESS:"Login Succesfully",
+  TOKEN_STORAGE_KEY:"This is TOKEN STORAGE KEY"
 };
 
 /*

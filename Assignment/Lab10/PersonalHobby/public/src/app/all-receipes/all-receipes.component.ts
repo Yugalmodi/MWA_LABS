@@ -66,6 +66,6 @@ export class AllReceipesComponent implements OnInit {
   }
 
   onDisplay(){
-    this.getDataFromServer("","");
+    this.getDataFromServer();
   }
 }

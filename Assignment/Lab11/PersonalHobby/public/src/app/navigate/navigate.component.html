@@ -2,7 +2,7 @@
     <button routerLink="/">Home</button>
     <button routerLink="/receipes">Receipes</button>
     <button routerLink="/search">Search Receipes</button>
-    <button routerLink="/addNew">Add Receipe</button>
-    <button routerLink="/register">Register</button>
+    <button *ngIf="isLoggedIn" routerLink="/addNew">Add Receipe</button>
+    <button *ngIf="!isLoggedIn" routerLink="/register">Register</button>
     <app-login class="right"></app-login>
 </nav>

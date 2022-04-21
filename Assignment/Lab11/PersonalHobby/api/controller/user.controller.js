@@ -31,8 +31,9 @@ const addOne = function (req, res){
 }
 
 const _comparePasswordAndUpdateResponse = function(response, result, username){
+    console.log("_comparePasswordAndUpdateResponse", result);
     if(result){
-        const token = jwt.sign({name:username}, process.env.JWT_TOKEN_SECRET, {expiresIn:'1800s'});
+        const token = jwt.sign({username:username}, process.env.JWT_TOKEN_SECRET, {expiresIn:'1800s'});
         const message = {
             Success:true,
             token:token
@@ -45,7 +46,6 @@ const _comparePasswordAndUpdateResponse = function(response, result, username){
     }
 }
 const _checkUserNameAndUpdateResponse = function(response, result, password){
-    console.log("_checkUserIdAndUpdateResponse", result);
     if(result.length>0){
         return bcrypt.compare(password, result[0].password);
     } else {
@@ -60,7 +60,7 @@ const login = function (req, res){
         const password = req.body.password;
         USERS.find({username:username})
             .then((result)=>_checkUserNameAndUpdateResponse(response, result, password))
-            .then((result)=>_comparePasswordAndUpdateResponse(response, result, username))
+            .then((isPassMatch)=>_comparePasswordAndUpdateResponse(response, isPassMatch, username))
             .catch((err)=>myUtils.updateMyResponse(response,err,process.env.RES_STATUS_CODE_ERR_SERVER))
             .finally(()=> myUtils.terminate(res, response));
     } else {
