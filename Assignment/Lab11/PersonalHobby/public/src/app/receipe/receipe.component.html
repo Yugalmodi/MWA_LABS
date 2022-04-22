@@ -1,5 +1,5 @@
-<H1>{{receipe.name}}</H1>
-Country:- {{receipe.country}}
+<H1>{{receipe.name | titlecase}}</H1>
+Country:- {{receipe.country | titlecase}}
 <app-edit-receipe  *ngIf="isLoggedIn" [receipeId]="receipe._id"  [receipe]="receipe" (editReceipeEmitter)="onReceipeChange($event)"></app-edit-receipe>
    
 <br>
@@ -9,9 +9,9 @@ Ingredients:-
 <ul>
     <li *ngFor="let ingredient of receipe.ingredients">
         <div>
-            <span>name:-{{ingredient.name}}</span> 
+            <span>name:-{{ingredient.name | titlecase}}</span> 
             <br>
-            <span *ngIf="ingredient.color">color:-{{ingredient.color}}</span>
+            <span *ngIf="ingredient.color">color:-{{ingredient.color | titlecase}}</span>
         </div>
 
         <app-edit-ingredient *ngIf="isLoggedIn" [receipeId]="receipe._id"  [ingredient]="ingredient" (editIngredientEmitter)="onIngredientChange($event)"></app-edit-ingredient>

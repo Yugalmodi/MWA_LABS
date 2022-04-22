@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+
 import { Receipe } from '../all-receipes/all-receipes.component';
 import { ReceipeServiceService } from '../receipe-service.service';
 
@@ -28,7 +29,7 @@ export class SearchReceipeComponent implements OnInit {
     this.service.getAllReceipe(0, this.ngSelectCount, searchBy, query).subscribe({
         next:(result)=>{
           this.receipes = result;
-          console.log(this.receipes);
+          // console.log(this.receipes);
         }, 
         error:(err)=>{
           console.log("Find an error", err);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+
 import { environment } from 'src/environments/environment';
 import { UsersService } from '../users.service';
 
@@ -32,7 +33,7 @@ export class RegistrationComponent implements OnInit {
 
   onRegistration(myForm:NgForm){
     if(myForm.value.password!==myForm.value.confirm_password){
-      this.displayMessage("Password and Confirm Password should be match.", true);
+      this.displayMessage(environment.MSG_REG_PAS_EMP, true);
       return;
     }
     this.userService.register(this.fillForm(myForm.value)).subscribe({
@@ -60,7 +61,7 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  fillForm(formData:any):UserCredential{
+  fillForm(formData:UserCredential):UserCredential{
     console.log(formData);
     const userCredential:UserCredential = new UserCredential("", formData.name, formData.username, formData.password);
     return userCredential;

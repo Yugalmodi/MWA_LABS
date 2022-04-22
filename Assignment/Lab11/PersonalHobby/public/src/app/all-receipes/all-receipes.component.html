@@ -5,7 +5,7 @@
 </select>
 <ul>
     <li *ngFor="let receipe of receipes">
-        <a routerLink="/receipes/{{receipe._id}}">{{receipe.name}}</a>
+        <a routerLink="/receipes/{{receipe._id}}">{{receipe.name | titlecase}}</a>
     </li>
 </ul>
 

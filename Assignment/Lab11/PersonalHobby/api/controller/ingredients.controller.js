@@ -160,22 +160,22 @@ const _handleAdd = function(req, res, _requiredReceipeFun){
 
 const _addReceipe = function(receipe, req){    
     let newIngredient = {
-        name:req.body.name,
-        color:req.body.color
+        name:req.body.name.toLowerCase(),
+        color:req.body.color.toLowerCase()
     }
     receipe.ingredients.push(newIngredient);
     return receipe;    
 }
 const _partialUpdateReceipe = function(receipe, req){
     const id = receipe.ingredients.id(req.params.ingredientId);
-    id.name = req.body.name ||  id.name;
-    id.color = req.body.color ||  id.color;
+    id.name = req.body.name.toLowerCase() ||  id.name;
+    id.color = req.body.color.toLowerCase() ||  id.color;
     return receipe;    
 }
 const _fullUpdateReceipe = function(receipe, req){
     const ingredientId = receipe.ingredients.id(req.params.ingredientId);
-    ingredientId.name = req.body.name; 
-    ingredientId.color = req.body.color;
+    ingredientId.name = req.body.name.toLowerCase(); 
+    ingredientId.color = req.body.color.toLowerCase();
     return receipe;    
 }
 const addOne = function(req, res){

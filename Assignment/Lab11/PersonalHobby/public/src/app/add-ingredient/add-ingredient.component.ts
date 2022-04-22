@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+
 import { Ingredients } from '../all-receipes/all-receipes.component';
 import { ReceipeServiceService } from '../receipe-service.service';
 

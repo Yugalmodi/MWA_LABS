@@ -9,7 +9,10 @@ export const environment = {
   URL_LOGIN:"Please pass backend Server Link for LOGIN",
   REGIS_SUCCESS:"Regitration Done Succesfully",
   LOGIN_SUCCESS:"Login Succesfully",
-  TOKEN_STORAGE_KEY:"This is TOKEN STORAGE KEY"
+  TOKEN_STORAGE_KEY:"This is TOKEN STORAGE KEY",
+  MSG_REC_ADD:"Receipe Added Succesfully",
+  MSG_REC_EMP:"Receipe Name and Country cannot be empty",
+  MSG_REG_PAS_EMP:"Password and Confirm Password should be match."
 };
 
 /*

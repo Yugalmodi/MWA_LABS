@@ -8,8 +8,8 @@ const addOne = function (req, res){
     const response = myUtils.getDefaultResponse();
     if(req.body && req.body.username && req.body.password){
         const newUser = {
-            name : req.body.name,
-            username : req.body.username
+            name : req.body.name.toLowerCase(),
+            username : req.body.username.toLowerCase()
         };
         bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS))
             .then((salt)=>{
@@ -53,7 +53,7 @@ const _checkUserNameAndUpdateResponse = function(response, result, password){
 const login = function (req, res){
     const response = myUtils.getDefaultResponse();
     if(req.body && req.body.username && req.body.password){
-        const username = req.body.username;
+        const username = req.body.username.toLowerCase();
         const password = req.body.password;
         USERS.find({username:username})
             .then((result)=>_checkUserNameAndUpdateResponse(response, result, password))

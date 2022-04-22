@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+
+import { Observable, Subscriber } from 'rxjs';
+
 import { AuthService } from '../auth.service';
 import { UserCredential } from '../registration/registration.component';
 import { UsersService } from '../users.service';
@@ -38,15 +40,12 @@ export class LoginComponent implements OnInit {
   onLoginClick(myForm:NgForm){
     this.userService.login(this.fillForm(myForm.value)).subscribe({
       next:(loginResponse:LoginResponse)=>{
-        console.log("next", loginResponse);
         this.authservice.token = loginResponse.token;
         this.authservice.isLoggedIn = true;
         this.router.navigate(["/"]);
       }, 
       error:(err)=>{
         this.displayMessage(err.error, true);
-        console.log("error", err.error);
-        console.log("error2", err);
       }, 
       complete:()=>{
         console.log("complete");
@@ -63,8 +62,8 @@ export class LoginComponent implements OnInit {
       this.isSuccess = true;
     }
   }
-  fillForm(formData:any):UserCredential{
-    console.log(formData);
+  fillForm(formData:UserCredential):UserCredential{
+    // console.log(formData);
     const userCredential:UserCredential = new UserCredential("","", formData.username, formData.password);
     return userCredential;
   }
@@ -73,4 +72,8 @@ export class LoginComponent implements OnInit {
     this.authservice.isLoggedIn = false;
     this.router.navigate(["/"]);
   }
+
+  time = new Observable<string>((observer: Subscriber<string>) => {
+    setInterval(() => observer.next(new Date().toString()), 1000);
+});
 }

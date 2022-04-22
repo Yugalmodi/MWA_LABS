@@ -1,3 +1,9 @@
+<div *ngIf="isError" class="alert alert-dismissible alert-danger">
+    {{notificationMessage}}
+</div>
+<div *ngIf="isSuccess" class="alert alert-dismissible alert-success">
+    {{notificationMessage}}
+</div>
 <form #receipeForm="ngForm" (ngSubmit)="onSubmit()">
     <div>
         <label>

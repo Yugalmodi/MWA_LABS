@@ -85,9 +85,9 @@ const  _getQuery = function(response){
             }
         }
     } else if(response.name!=null){
-        query={name:{$regex: response.name}}
+        query={name:{$regex: response.name.toLowerCase()}}
     } else if(response.country!=null){
-        query={country:{$regex: response.country}}
+        query={country:{$regex: response.country.toLowerCase()}}
     }
     return query;
 }
@@ -109,8 +109,8 @@ const getAll = function(req, res){
 const addOne = function(req, res){
     const response = myUtils.getDefaultResponse();
     const newReceipe = {
-        name : req.body.name,
-        country : req.body.country,
+        name : req.body.name.toLowerCase(),
+        country : req.body.country.toLowerCase(),
         ingredients : []
     };
     Receipe.create(newReceipe) 
@@ -189,13 +189,13 @@ const _update = function(req, res, udpateReceipeFun){
 }
 
 const _fullUpdateReceipe = function(receipe, req){
-    receipe.name = req.body.name;
-    receipe.country = req.body.country;
+    receipe.name = req.body.name.toLowerCase();
+    receipe.country = req.body.country.toLowerCase();
     return receipe;
 }
 const _partialUpdateReceipe = function(receipe, req){
-    receipe.name = req.body.name || receipe.name ;
-    receipe.country = req.body.country || receipe.country;
+    receipe.name = req.body.name.toLowerCase() || receipe.name ;
+    receipe.country = req.body.country.toLowerCase() || receipe.country;
     return receipe;
 }
 const fullUpdateOne= function(req, res){

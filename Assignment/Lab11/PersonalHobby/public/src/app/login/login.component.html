@@ -21,6 +21,8 @@
     </div>
 </div>
 <div *ngIf="isLoggedIn">
-    {{username}}
+    {{username | titlecase}}
     <button (click)="logoutCilck()">Logout</button>
 </div>
+
+<div class="right">{{time | async | date:'mediumTime'}}</div>

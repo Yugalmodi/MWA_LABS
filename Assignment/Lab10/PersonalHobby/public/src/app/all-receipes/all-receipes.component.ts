@@ -42,14 +42,14 @@ export class AllReceipesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getDataFromServer("","");
+    this.getDataFromServer();
   }
 
-  getDataFromServer(searchBy:string, query:string){
+  getDataFromServer(){
     this.service.getAllReceipe(this.ngSelectCount, searchBy, query).subscribe({
         next:(result)=>{
           this.receipes = result;
-          console.log(this.receipes);
+          // console.log(this.receipes);
         }, 
         error:(err)=>{
           console.log("Find an error", err);

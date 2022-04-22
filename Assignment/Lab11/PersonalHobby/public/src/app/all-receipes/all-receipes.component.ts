@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+
 import { ReceipeServiceService } from '../receipe-service.service';
 
 export class Ingredients {
@@ -44,12 +44,12 @@ export class AllReceipesComponent implements OnInit {
   }
 
   getDataFromServer(){
-    console.log("getDataFromServer", this.offset, this.ngSelectCount);
+    // console.log("getDataFromServer", this.offset, this.ngSelectCount);
     
     this.service.getAllReceipe(this.offset, this.ngSelectCount, '', '').subscribe({
         next:(result)=>{
           this.receipes = result;
-          console.log(this.receipes);
+          // console.log(this.receipes);
         }, 
         error:(err)=>{
           console.log("Find an error", err);
@@ -59,7 +59,7 @@ export class AllReceipesComponent implements OnInit {
         }
     });
   }
-  onChange(value:any){
+  onChange(value:number){
     this.ngSelectCount = Number(value);
     this.getDataFromServer();
   }
